@@ -27,7 +27,7 @@ export function LandingHeader() {
     <>
       <header className={`course-header ${compact ? "is-compact" : ""}`}>
         <div className="course-container flex items-center justify-between gap-4 py-4">
-          <BrandMark size="sm" href="/#top" />
+          <BrandMark size="sm" href="/#top" withTld />
 
           <div className="flex items-center gap-2 sm:gap-3">
             <CourseButton
@@ -63,7 +63,7 @@ export function LandingHeader() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-6 flex items-center justify-between">
-              <BrandMark size="sm" as="span" />
+              <BrandMark size="sm" as="span" withTld />
               <button
                 type="button"
                 aria-label="Закрити"

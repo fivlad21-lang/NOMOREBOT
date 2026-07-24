@@ -27,16 +27,19 @@ type Props = {
   href?: string | null;
   className?: string;
   as?: "link" | "span";
+  /** Domain suffix .wtf — ONLY for top header logo. */
+  withTld?: boolean;
 };
 
 /**
- * Brand mark: NOMORE LAB + small .wtf (domain nomorelab.wtf).
+ * Brand wordmark. Pass `withTld` only in the site header.
  */
 export function BrandMark({
   size = "md",
   href = "/#top",
   className = "",
   as,
+  withTld = false,
 }: Props) {
   const sizes = sizeClass[size];
   const content = (
@@ -44,12 +47,13 @@ export function BrandMark({
       className={`course-display inline-flex items-start tracking-tight text-white ${sizes.base} ${className}`}
     >
       <span>{BRAND}</span>
-      <span
-        className={`ml-[0.12em] translate-y-[0.12em] font-medium leading-none text-white/55 ${sizes.tld}`}
-        aria-hidden={false}
-      >
-        .wtf
-      </span>
+      {withTld ? (
+        <span
+          className={`ml-[0.12em] translate-y-[0.12em] font-medium leading-none text-white/55 ${sizes.tld}`}
+        >
+          .wtf
+        </span>
+      ) : null}
     </span>
   );
 

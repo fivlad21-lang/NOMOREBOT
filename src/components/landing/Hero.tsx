@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { BrandMark } from "./BrandMark";
-import { BUILD_TIME, expert, expertPhoto } from "@/data/course";
+import { BRAND, BUILD_TIME, expert, expertPhoto } from "@/data/course";
 import { CourseButton } from "./CourseButton";
 import { MetaChip } from "./MetaChip";
 
@@ -18,7 +17,10 @@ export function Hero({ subtitle }: Props) {
     >
       <div className="course-container grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
         <div className="hero-fade max-w-2xl">
-          <BrandMark size="hero" as="span" className="mb-4 leading-none" />
+          <p className="course-display mb-4 text-4xl leading-[0.92] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+            <span className="block">NOMORE</span>
+            <span className="block">LAB</span>
+          </p>
           <h1 className="course-display mb-5 text-3xl leading-[1.08] sm:text-4xl md:text-5xl">
             Сайт, який продає — за вечір, не за місяць
           </h1>
@@ -34,7 +36,7 @@ export function Hero({ subtitle }: Props) {
           </div>
 
           <MetaChip>
-            Цей лендінг створено за{" "}
+            Цей лендінг {BRAND} зібрано за{" "}
             <strong className="font-semibold text-white">{BUILD_TIME}</strong>
           </MetaChip>
         </div>

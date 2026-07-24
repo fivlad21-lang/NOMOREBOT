@@ -217,7 +217,8 @@ export type Testimonial = {
   niche: string;
   pain: string;
   quote: string;
-  avatar: string;
+  /** Optional real photo path under /public. Prefer initials if missing. */
+  avatar?: string;
 };
 
 export const testimonials: Testimonial[] = [
@@ -228,8 +229,6 @@ export const testimonials: Testimonial[] = [
     pain: "хотів продавати",
     quote:
       "Брав, бо хотів не просто «вчити html», а реально продавати сайти. Зібрав ленд за вечір, кинув другу — той скинув задаток. Це вже не теорія.",
-    avatar:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=160&h=160&q=80",
   },
   {
     name: "Оксана",
@@ -238,8 +237,6 @@ export const testimonials: Testimonial[] = [
     pain: "хотіла зекономити",
     quote:
       "Агентству ломить космос. Зробила сама під свій бізнес і досі кайфую, що не віддала пів зарплати за «шаблончик».",
-    avatar:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=160&h=160&q=80",
   },
   {
     name: "Денис",
@@ -248,8 +245,6 @@ export const testimonials: Testimonial[] = [
     pain: "треба було швидко і доступно",
     quote:
       "Мені треба було вчора. Без води, без «модуль 40». Відкрив — зробив — залив. Найадекватніший шлях, який бачив.",
-    avatar:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&h=160&q=80",
   },
   {
     name: "Юля",
@@ -258,8 +253,6 @@ export const testimonials: Testimonial[] = [
     pain: "сайт виглядав дешево",
     quote:
       "Мій старий сайт виглядав як 2017. Після курсу люди перестали питати «це конструктор?», почали питати прайс.",
-    avatar:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=160&h=160&q=80",
   },
   {
     name: "Ігор",
@@ -268,8 +261,6 @@ export const testimonials: Testimonial[] = [
     pain: "трафік був, продажів — нуль",
     quote:
       "Трафік був, сайту нормального — нуль. Підключив оплату по уроку і нарешті воронка закрилась у продаж, а не в «напишіть в дірект».",
-    avatar:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=160&h=160&q=80",
   },
   {
     name: "Катя",
@@ -278,8 +269,6 @@ export const testimonials: Testimonial[] = [
     pain: "боялась застрягнути",
     quote:
       "Сама б тиждень тикала. На розборі переписали hero — і заявки пішли. Якщо боїшся застрягнути — Mentor реально топ.",
-    avatar:
-      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=160&h=160&q=80",
   },
 ];
 
