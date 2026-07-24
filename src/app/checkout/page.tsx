@@ -3,9 +3,18 @@ import { BrandMark } from "@/components/landing/BrandMark";
 import { CheckoutForm } from "@/components/landing/CheckoutForm";
 import { OrbBackground } from "@/components/landing/OrbBackground";
 import { getPlan, type PlanId } from "@/data/course";
+import { parseAttributionFromSearchParams } from "@/lib/attribution";
 
 type Props = {
-  searchParams: Promise<{ plan?: string }>;
+  searchParams: Promise<{
+    plan?: string;
+    from?: string;
+    utm_source?: string;
+    utm_medium?: string;
+    utm_campaign?: string;
+    utm_content?: string;
+    utm_term?: string;
+  }>;
 };
 
 const PLAN_IDS: PlanId[] = ["start", "community", "mentor"];
@@ -18,6 +27,7 @@ export default async function CheckoutPage({ searchParams }: Props) {
   const params = await searchParams;
   const planId = isPlanId(params.plan) ? params.plan : "community";
   const plan = getPlan(planId)!;
+  const attribution = parseAttributionFromSearchParams(params);
 
   return (
     <div className="course-theme course-shell min-h-screen">
@@ -35,7 +45,7 @@ export default async function CheckoutPage({ searchParams }: Props) {
           </div>
 
           <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[1fr_0.9fr]">
-            <CheckoutForm planId={planId} />
+            <CheckoutForm planId={planId} attribution={attribution} />
 
             <aside className="course-glass h-fit space-y-5 p-6">
               <div>

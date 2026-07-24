@@ -11,7 +11,18 @@ type Body = {
   email?: string;
   telegram?: string;
   source?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  utmContent?: string;
+  utmTerm?: string;
 };
+
+function cleanAttr(value: string | undefined): string | null {
+  const trimmed = value?.trim();
+  if (!trimmed) return null;
+  return trimmed.slice(0, 120);
+}
 
 export async function POST(request: Request) {
   let body: Body;
@@ -54,7 +65,12 @@ export async function POST(request: Request) {
       telegram,
       amountUah: plan.priceUah,
       status: "pending",
-      source: body.source?.trim() || null,
+      source: cleanAttr(body.source),
+      utmSource: cleanAttr(body.utmSource),
+      utmMedium: cleanAttr(body.utmMedium),
+      utmCampaign: cleanAttr(body.utmCampaign),
+      utmContent: cleanAttr(body.utmContent),
+      utmTerm: cleanAttr(body.utmTerm),
       createdAt: now,
       updatedAt: now,
     });

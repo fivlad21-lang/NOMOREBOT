@@ -52,4 +52,6 @@ npm run smoke:orders
 | markFailed | не перетирає paid |
 | provisioned | після Approved webhook |
 
+Поля order (мін.): `orderReference, planId, email, telegram?, amountUah, status, providerStatus?, reason?, source? (from), utmSource/Medium/Campaign/Content/Term?, provisioned, createdAt, updatedAt`
+
 Поки Redis не підключено на проді — система працює, але статус може «губитись» між інстансами (WFP CHECK_STATUS лишається запасним шляхом).

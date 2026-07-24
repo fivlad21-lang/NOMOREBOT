@@ -20,7 +20,7 @@
 | Fail UI + POST return bridge | є (1.3), **prod PASS E1** |
 | Оферта / privacy / ФОП | є (E4); реквізити фізособи + IBAN, ФОП пізніше |
 | Persisted orders | код Redis/KV (E3); на проді увімкнути env |
-| Пікселі / email після оплати | немає |
+| Пікселі / UTM / OG | є (E8); Pixel IDs — власник у Vercel |
 | Контент курсу в TG | шаблони E5; наповнення — власник |
 
 ---
@@ -108,7 +108,7 @@ E1 Деплой і smoke
 Vercel KV / Upstash Redis (або Postgres).
 
 ### Поля order
-`orderReference, planId, email, telegram?, amountUah, status, providerStatus?, reason?, provisioned, createdAt, updatedAt`
+`orderReference, planId, email, telegram?, amountUah, status, providerStatus?, reason?, source? (from), utm*, provisioned, createdAt, updatedAt`
 
 ### Acceptance
 - [x] Код: Redis/KV store + memory fallback; API async
@@ -213,6 +213,15 @@ Hero full-bleed; бренд hero-рівень; CTA з ціною; коротши
 # E8 — Аналітика і UTM
 
 Зберігати `from`/UTM у order; TikTok + Meta pixels; Purchase лише на `paid`; OG 1200×630.
+
+### Acceptance
+- [x] `from` + UTM → sessionStorage → `/api/pay/create` → order fields
+- [x] Meta + TikTok pixels (env IDs); ViewContent / InitiateCheckout
+- [x] Purchase / CompletePayment лише коли thanks status = `paid` (dedupe per order)
+- [x] OG image 1200×630 (`/opengraph-image`) + layout metadata
+- [ ] Pixel IDs на Vercel (власник перед E10)
+
+**Артефакт:** `TZ-NOMORE-LAB-2.0-E8.md` — **PASS** (код); IDs — owner
 
 ---
 

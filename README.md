@@ -7,6 +7,7 @@
 - Платежі test vs live: [`docs/WAYFORPAY-TEST-LIVE.md`](./docs/WAYFORPAY-TEST-LIVE.md)
 - Orders persistence: [`docs/ORDERS-PERSISTENCE.md`](./docs/ORDERS-PERSISTENCE.md)
 - Access ops: [`docs/ACCESS-OPS.md`](./docs/ACCESS-OPS.md)
+- Analytics / UTM / pixels: [`docs/ANALYTICS.md`](./docs/ANALYTICS.md)
 
 ## Запуск
 ```bash
@@ -16,7 +17,7 @@ npm run dev
 
 Відкрийте http://localhost:3000
 
-UTM-приклад: http://localhost:3000?from=tiktok
+UTM-приклад: http://localhost:3000?from=tiktok&utm_source=tiktok&utm_medium=paid&utm_campaign=launch
 
 ## Контакти
 - Telegram: [@notany](https://t.me/notany)
@@ -40,6 +41,8 @@ WAYFORPAY_SERVICE_URL=https://nomorebot.vercel.app/api/pay/webhook
 NEXT_PUBLIC_SITE_URL=https://nomorebot.vercel.app
 UPSTASH_REDIS_REST_URL=
 UPSTASH_REDIS_REST_TOKEN=
+NEXT_PUBLIC_META_PIXEL_ID=
+NEXT_PUBLIC_TIKTOK_PIXEL_ID=
 ```
 
 | Режим | Merchant | Куди |

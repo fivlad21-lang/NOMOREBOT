@@ -1,3 +1,4 @@
+import { ViewContentTracker } from "@/components/analytics/ViewContentTracker";
 import { LandingHeader } from "./LandingHeader";
 import { Hero } from "./Hero";
 import { ProofStrip } from "./ProofStrip";
@@ -22,6 +23,7 @@ type Props = {
 export function CourseLanding({ subtitle }: Props) {
   return (
     <div className="course-theme course-shell">
+      <ViewContentTracker />
       <OrbBackground />
       <div className="course-content">
         <LandingHeader />

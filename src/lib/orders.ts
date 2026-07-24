@@ -11,7 +11,13 @@ export type StoredOrder = {
   status: OrderStatus;
   providerStatus?: string | null;
   reason?: string | null;
+  /** Traffic channel from `?from=` (tiktok / instagram / telegram / …) */
   source?: string | null;
+  utmSource?: string | null;
+  utmMedium?: string | null;
+  utmCampaign?: string | null;
+  utmContent?: string | null;
+  utmTerm?: string | null;
   provisioned?: boolean;
   createdAt: number;
   updatedAt: number;

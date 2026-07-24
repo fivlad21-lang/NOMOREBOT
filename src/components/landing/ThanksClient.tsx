@@ -15,6 +15,7 @@ import {
   mentorDmHref,
   nextStepsByPlan,
 } from "@/data/access";
+import { trackPurchase } from "@/lib/analytics";
 
 type PayUiStatus = "pending" | "paid" | "failed" | "unknown";
 
@@ -311,6 +312,12 @@ export function ThanksClient({
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps -- poll once per order
   }, [orderId, initialStatus]);
+
+  // Purchase pixel only after confirmed paid (once per orderId).
+  useEffect(() => {
+    if (status !== "paid" || !orderId) return;
+    trackPurchase({ orderId, planId });
+  }, [status, orderId, planId]);
 
   return (
     <div className="mx-auto max-w-2xl px-5 py-16 sm:px-8 sm:py-24">
