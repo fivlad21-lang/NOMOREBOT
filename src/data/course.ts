@@ -8,6 +8,7 @@ export type Plan = {
   badge?: string;
   highlighted?: boolean;
   tone: "quiet" | "featured" | "accent";
+  forWhom: string;
   features: string[];
   cta: string;
 };
@@ -56,8 +57,8 @@ export const navItems = [
   { href: "#program", label: "Програма", id: "program" },
   { href: "#expert", label: "Експерт", id: "expert" },
   { href: "#reviews", label: "Відгуки", id: "reviews" },
-  { href: "#faq", label: "FAQ", id: "faq" },
   { href: "#pricing", label: "Тарифи", id: "pricing" },
+  { href: "#faq", label: "FAQ", id: "faq" },
 ] as const;
 
 export const plans: Plan[] = [
@@ -67,13 +68,14 @@ export const plans: Plan[] = [
     priceUsd: 20,
     priceUah: 820,
     tone: "quiet",
+    forWhom: "Для тих, хто розбирається сам",
     features: [
       "Повний відеокурс у закритому Telegram-каналі",
       "Готові структури лендінгів під офер",
       "Чеклісти: запуск, оплата, правки",
       "Оновлення уроків без доплати",
     ],
-    cta: "Взяти Start",
+    cta: "Оплатити Start",
   },
   {
     id: "community",
@@ -83,13 +85,14 @@ export const plans: Plan[] = [
     badge: "Найчастіший вибір",
     highlighted: true,
     tone: "featured",
+    forWhom: "Для тих, хто хоче питати по ходу",
     features: [
       "Усе з тарифу Start (канал з курсом)",
       "Закрита Telegram-група комʼюніті",
       "Питання по ходу збірки — відповіді від людей, хто вже запускав",
       "Розбори чужих лендінгів і робочі приклади",
     ],
-    cta: "Взяти Community",
+    cta: "Оплатити Community",
   },
   {
     id: "mentor",
@@ -98,13 +101,14 @@ export const plans: Plan[] = [
     priceUah: 4100,
     badge: `Лише ${MENTOR_SEATS} місць`,
     tone: "accent",
+    forWhom: "Для тих, хто хоче супровід 1:1",
     features: [
       "Усе з тарифу Community (канал + група)",
       "14 днів особистого чату зі мною",
       "2 дзвінки 1:1",
       "1 повний розбір твого лендінгу під твій офер",
     ],
-    cta: "Взяти Mentor",
+    cta: "Оплатити Mentor",
   },
 ];
 
@@ -308,13 +312,14 @@ export const faq = [
 ];
 
 export const sourceSubtitles: Record<string, string> = {
-  tiktok: "Зайшов з TikTok? Ось лендінг, зібраний за вечір — і курс, як робити такі самі.",
+  tiktok:
+    "Зайшов з TikTok? Збери лендінг під свій офер за вечір — і приймай оплату на сайті.",
   instagram:
-    "Зайшов з Instagram? Нижче — воронка, glass UI і тарифи під швидкий запуск.",
+    "Зайшов з Instagram? Воронка під Reels: структура, UI, тарифи й checkout.",
   telegram:
     "Зайшов з Telegram? Курс + комʼюніті, щоб зібрати сайт і не робити це наодинці.",
   default:
-    "Курс для тих, хто хоче робити сайти собі, клієнтам і під запуск з TikTok",
+    "Збери лендінг під TikTok / Instagram за вечір — і приймай оплату без агентства.",
 };
 
 export function subtitleForSource(from: string | null | undefined) {

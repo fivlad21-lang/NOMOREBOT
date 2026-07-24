@@ -1,4 +1,4 @@
-import { plans } from "@/data/course";
+import { plans, steps } from "@/data/course";
 import { CourseButton } from "./CourseButton";
 import { Reveal } from "./Reveal";
 
@@ -10,9 +10,26 @@ export function Pricing() {
           <h2 className="course-heading mb-3 text-center text-3xl md:text-4xl">
             Обери свій тариф
           </h2>
-          <p className="mx-auto mb-10 max-w-xl text-center text-[var(--text-muted)]">
-            Одноразова оплата. Доступ одразу після оплати на email / у Telegram.
+          <p className="mx-auto mb-8 max-w-xl text-center text-[var(--text-muted)]">
+            Одноразова оплата. Після Approved — кнопки доступу в Telegram на
+            thank-you.
           </p>
+        </Reveal>
+
+        <Reveal>
+          <div className="mb-10 grid gap-4 border-y border-white/10 py-6 md:grid-cols-3">
+            {steps.map((step) => (
+              <div key={step.n} className="text-center md:text-left">
+                <p className="course-display text-2xl text-white/30">{step.n}</p>
+                <p className="course-heading mt-1 text-base text-white">
+                  {step.title}
+                </p>
+                <p className="mt-1 text-sm text-[var(--text-muted)]">
+                  {step.text}
+                </p>
+              </div>
+            ))}
+          </div>
         </Reveal>
 
         <div className="grid items-stretch gap-5 lg:grid-cols-3">
@@ -40,6 +57,9 @@ export function Pricing() {
                   <h3 className="course-display text-2xl text-white">
                     {plan.name}
                   </h3>
+                  <p className="mt-2 text-sm text-[var(--text-muted)]">
+                    {plan.forWhom}
+                  </p>
 
                   <div className="mt-4 mb-6">
                     <p className="course-display text-4xl text-white">
@@ -65,7 +85,7 @@ export function Pricing() {
                     className="w-full"
                     data-plan={plan.id}
                   >
-                    {plan.cta}
+                    {plan.cta} · ₴{plan.priceUah.toLocaleString("uk-UA")}
                   </CourseButton>
 
                   <p className="mt-3 text-center text-xs text-[var(--text-muted)]">
@@ -76,11 +96,6 @@ export function Pricing() {
             );
           })}
         </div>
-
-        <p className="mt-8 text-center text-sm text-[var(--text-muted)]">
-          Доступ протягом кількох хвилин на email. Community і Mentor — інвайт у
-          Telegram.
-        </p>
       </div>
     </section>
   );

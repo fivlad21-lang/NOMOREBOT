@@ -1,4 +1,4 @@
-import { pains } from "@/data/course";
+import { forWhom, pains } from "@/data/course";
 import { Reveal } from "./Reveal";
 
 export function PainSolutions() {
@@ -6,12 +6,12 @@ export function PainSolutions() {
     <section className="course-section">
       <div className="course-container">
         <Reveal>
-          <h2 className="mb-3 max-w-3xl text-3xl font-bold tracking-tight text-white md:text-4xl">
-            Чому бізнес сидить на підрядниках і переплачує
+          <h2 className="course-heading mb-3 max-w-3xl text-3xl md:text-4xl">
+            Дорого, довго, без контролю — знайомо?
           </h2>
           <p className="mb-10 max-w-2xl text-[var(--text-muted)]">
-            Не лише «дешево і швидко». Ти контролюєш сайт сам — і правиш його,
-            коли треба, без черги в агентстві.
+            Курс закриває чотири болі бізнесу: ціна, швидкість, контроль і правки
+            наживо.
           </p>
         </Reveal>
 
@@ -32,6 +32,37 @@ export function PainSolutions() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal delay={120}>
+          <div className="mt-12 grid gap-8 border-t border-white/10 pt-10 md:grid-cols-2">
+            <div>
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-[var(--accent-lime)]">
+                Так, якщо ти
+              </p>
+              <ul className="space-y-2 text-sm text-[var(--text-muted)]">
+                {forWhom.yes.map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="text-[var(--accent-lime)]">+</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-[var(--accent-coral)]">
+                Ні, якщо ти
+              </p>
+              <ul className="space-y-2 text-sm text-[var(--text-muted)]">
+                {forWhom.no.map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="text-[var(--accent-coral)]">−</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
