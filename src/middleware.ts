@@ -1,8 +1,11 @@
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 
-export default createMiddleware(routing);
+const intlMiddleware = createMiddleware(routing);
+
+export default intlMiddleware;
 
 export const config = {
-  matcher: ["/", "/(ru|en|bg)/:path*", "/((?!_next|_vercel|.*\\..*).*)"],
+  // Keep estates demo under locale prefixes. Root `/`, checkout, thanks, api stay free.
+  matcher: ["/(ru|en|bg)/:path*"],
 };

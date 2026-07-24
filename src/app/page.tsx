@@ -1,6 +1,13 @@
-import { redirect } from "next/navigation";
-import { defaultLocale } from "@/i18n/routing";
+import { CourseLanding } from "@/components/landing/CourseLanding";
+import { subtitleForSource } from "@/data/course";
 
-export default function RootPage() {
-  redirect(`/${defaultLocale}`);
+type Props = {
+  searchParams: Promise<{ from?: string }>;
+};
+
+export default async function HomePage({ searchParams }: Props) {
+  const params = await searchParams;
+  const subtitle = subtitleForSource(params.from);
+
+  return <CourseLanding subtitle={subtitle} />;
 }
