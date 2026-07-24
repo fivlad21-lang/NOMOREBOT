@@ -10,6 +10,11 @@ import {
   thanksCopy,
   type PlanId,
 } from "@/data/course";
+import {
+  grantsForPlan,
+  mentorDmHref,
+  nextStepsByPlan,
+} from "@/data/access";
 
 type PayUiStatus = "pending" | "paid" | "failed" | "unknown";
 
@@ -47,9 +52,17 @@ function AccessButton({
   );
 }
 
-function SuccessByPlan({ planId }: { planId: PlanId }) {
+function SuccessByPlan({
+  planId,
+  orderId,
+}: {
+  planId: PlanId;
+  orderId: string | null;
+}) {
   const copy = thanksCopy[planId];
   const plan = plans.find((item) => item.id === planId);
+  const grants = grantsForPlan(planId);
+  const steps = nextStepsByPlan[planId];
 
   return (
     <motion.div
@@ -74,31 +87,51 @@ function SuccessByPlan({ planId }: { planId: PlanId }) {
             Пакет: {plan.name} · ${plan.priceUsd} / {plan.priceUah} ₴
           </p>
         ) : null}
+        {orderId ? (
+          <p className="mt-1 text-xs text-course-muted/70">
+            Замовлення: {orderId}
+          </p>
+        ) : null}
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-        <AccessButton
-          href={access.courseChannel}
-          label="Відкрити канал курсу"
-          primary
-        />
-        {(planId === "community" || planId === "mentor") && (
+        {grants.courseChannel && (
+          <AccessButton
+            href={access.courseChannel}
+            label="Відкрити канал курсу"
+            primary
+          />
+        )}
+        {grants.communityGroup && (
           <AccessButton
             href={access.communityGroup}
             label="Увійти в комʼюніті"
           />
         )}
-        {planId === "mentor" && (
-          <AccessButton href={contacts.telegram} label="Написати мені" />
+        {grants.mentorDm && (
+          <AccessButton
+            href={mentorDmHref(orderId)}
+            label="Написати мені"
+          />
         )}
       </div>
 
-      {planId === "mentor" ? (
-        <p className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm leading-relaxed text-course-muted">
-          Після входу в Telegram напиши мені в особисті з ніком замовлення —
-          відкрию чат менторства і домовимось про перший дзвінок.
-        </p>
-      ) : null}
+      <ol className="space-y-2 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4">
+        <li className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-course-muted">
+          Наступні кроки
+        </li>
+        {steps.map((step) => (
+          <li
+            key={step.n}
+            className="flex gap-3 text-sm leading-relaxed text-course-muted"
+          >
+            <span className="course-display text-base text-course-accent">
+              {step.n}
+            </span>
+            <span>{step.text}</span>
+          </li>
+        ))}
+      </ol>
 
       <div className="flex flex-wrap gap-3 pt-2 text-sm">
         <Link
@@ -297,8 +330,8 @@ export function ThanksClient({
               Зачекай кілька секунд
             </h1>
             <p className="text-base leading-relaxed text-course-muted sm:text-lg">
-              WayForPay підтверджує платіж. Як тільки статус стане Approved —
-              відкриємо доступ під твій пакет.
+              Підтверджуємо платіж. Як тільки оплата пройде — відкриємо доступ
+              під твій пакет (без зайвих листів: кнопки зʼявляться тут).
             </p>
             {orderId ? (
               <p className="text-sm text-course-muted/80">
@@ -327,7 +360,9 @@ export function ThanksClient({
           </motion.div>
         )}
 
-        {status === "paid" && <SuccessByPlan planId={planId} />}
+        {status === "paid" && (
+          <SuccessByPlan planId={planId} orderId={orderId} />
+        )}
 
         {status === "failed" && (
           <FailedState order={orderId} planId={planId} reason={reason} />

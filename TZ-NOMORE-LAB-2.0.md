@@ -21,7 +21,7 @@
 | Оферта / privacy / ФОП | є (E4); реквізити фізособи + IBAN, ФОП пізніше |
 | Persisted orders | код Redis/KV (E3); на проді увімкнути env |
 | Пікселі / email після оплати | немає |
-| Контент курсу в TG | поза кодом |
+| Контент курсу в TG | шаблони E5; наповнення — власник |
 
 ---
 
@@ -151,13 +151,25 @@ Vercel KV / Upstash Redis (або Postgres).
 
 # E5 — Доступ і операційка
 
-| План | Канал | Група | Ментор |
+| План | Канал курсу | Група комʼюніті | Ментор DM |
 | --- | --- | --- | --- |
 | Start | так | ні | ні |
 | Community | так | так | ні |
-| Mentor | так | так | `@notany` |
+| Mentor | так | так | `@notany` (prefilled order) |
 
-Мінімум у каналі: вітання, модуль 1, чекліст, правила групи, закріп підтримки.
+### Зроблено в коді
+- `src/data/access.ts` — матриця + next steps + mentor DM href
+- Thanks: кроки після оплати, orderId, mentor prefill
+- Webhook лог з `grants` / ops flags
+- Docs: `docs/ACCESS-OPS.md`, `docs/channel-starter.md`
+
+### Acceptance
+- [x] Матриця доступу в UI/коді
+- [x] Ops docs + шаблони каналу
+- [ ] Канал наповнений у TG (власник)
+- [ ] Mentor seats трекаються вручну
+
+**Артефакт:** `TZ-NOMORE-LAB-2.0-E5.md`
 
 ---
 

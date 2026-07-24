@@ -161,7 +161,9 @@ export function CheckoutForm({ planId }: Props) {
 
       <p className="text-xs leading-relaxed text-[var(--text-muted)]">
         Оплата через WayForPay (картка, Apple Pay / Google Pay). Після успішної
-        оплати відкриється сторінка доступу.
+        оплати на thank-you зʼявляться кнопки доступу: канал курсу
+        {plan.id !== "start" ? ", група комʼюніті" : ""}
+        {plan.id === "mentor" ? " і звʼязок зі мною" : ""}.
       </p>
     </form>
   );

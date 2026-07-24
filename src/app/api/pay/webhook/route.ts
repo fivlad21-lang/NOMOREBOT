@@ -15,6 +15,8 @@ import {
   verifyWebhookSignature,
   type WfpWebhookPayload,
 } from "@/lib/wayforpay";
+import { grantsForPlan } from "@/data/access";
+import type { PlanId } from "@/data/course";
 
 export async function POST(request: Request) {
   let payload: WfpWebhookPayload;
@@ -89,14 +91,26 @@ export async function POST(request: Request) {
   if (mapped === "paid") {
     const paid = (await markOrderPaid(orderReference)) || order;
     if (paid && !paid.provisioned) {
+      const planId = (
+        paid.planId === "community" || paid.planId === "mentor"
+          ? paid.planId
+          : "start"
+      ) as PlanId;
+      const grants = grantsForPlan(planId);
       console.info("[pay.webhook] APPROVED — provision access", {
         orderReference,
         planId: paid.planId,
         email: paid.email,
         telegram: paid.telegram,
         amountUah: paid.amountUah,
+        grants,
+        ops: {
+          openCourseChannel: grants.courseChannel,
+          openCommunityGroup: grants.communityGroup,
+          expectMentorDm: grants.mentorDm,
+        },
       });
-      // TODO: send email + TG invite automation
+      // Access is self-serve via thanks buttons. Email/TG bot — later.
       await markProvisioned(orderReference);
     }
   } else if (mapped === "failed") {

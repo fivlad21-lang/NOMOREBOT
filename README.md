@@ -6,6 +6,7 @@
 - Roadmap: [`TZ-NOMORE-LAB-2.0.md`](./TZ-NOMORE-LAB-2.0.md)
 - Платежі test vs live: [`docs/WAYFORPAY-TEST-LIVE.md`](./docs/WAYFORPAY-TEST-LIVE.md)
 - Orders persistence: [`docs/ORDERS-PERSISTENCE.md`](./docs/ORDERS-PERSISTENCE.md)
+- Access ops: [`docs/ACCESS-OPS.md`](./docs/ACCESS-OPS.md)
 
 ## Запуск
 ```bash
