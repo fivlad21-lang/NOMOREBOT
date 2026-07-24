@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { BRAND, contacts, navItems } from "@/data/course";
+import { contacts, navItems } from "@/data/course";
+import { BrandMark } from "./BrandMark";
 import { CourseButton } from "./CourseButton";
 
 export function LandingHeader() {
@@ -27,12 +27,7 @@ export function LandingHeader() {
     <>
       <header className={`course-header ${compact ? "is-compact" : ""}`}>
         <div className="course-container flex items-center justify-between gap-4 py-4">
-          <Link
-            href="/#top"
-            className="course-display text-lg tracking-tight md:text-xl"
-          >
-            {BRAND}
-          </Link>
+          <BrandMark size="sm" href="/#top" />
 
           <div className="flex items-center gap-2 sm:gap-3">
             <CourseButton
@@ -68,7 +63,7 @@ export function LandingHeader() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-6 flex items-center justify-between">
-              <p className="course-display text-lg">{BRAND}</p>
+              <BrandMark size="sm" as="span" />
               <button
                 type="button"
                 aria-label="Закрити"

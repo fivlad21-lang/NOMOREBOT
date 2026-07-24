@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { getPlan, type PlanId } from "@/data/course";
@@ -16,6 +17,7 @@ export function CheckoutForm({ planId }: Props) {
   const [error, setError] = useState<string | null>(null);
   const [email, setEmail] = useState("");
   const [telegram, setTelegram] = useState("");
+  const [acceptedOffer, setAcceptedOffer] = useState(false);
 
   if (!plan) {
     return <p className="text-[var(--accent-coral)]">Тариф не знайдено.</p>;
@@ -24,6 +26,11 @@ export function CheckoutForm({ planId }: Props) {
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
+
+    if (!acceptedOffer) {
+      setError("Потрібно прийняти публічну оферту, щоб продовжити.");
+      return;
+    }
 
     startTransition(async () => {
       try {
@@ -67,7 +74,7 @@ export function CheckoutForm({ planId }: Props) {
     >
       <div>
         <p className="text-sm uppercase tracking-[0.14em] text-[var(--accent-cyan)]">
-          Checkout
+          Checkout · крок 2 з 2
         </p>
         <h1 className="course-display mt-2 text-3xl text-white">
           {plan.name} — ${plan.priceUsd}
@@ -108,11 +115,45 @@ export function CheckoutForm({ planId }: Props) {
         />
       </label>
 
+      <label className="flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-[var(--text-muted)]">
+        <input
+          type="checkbox"
+          required
+          checked={acceptedOffer}
+          onChange={(e) => setAcceptedOffer(e.target.checked)}
+          className="mt-1 h-4 w-4 shrink-0 rounded border-white/30 bg-white/5 accent-[var(--accent-cyan)]"
+        />
+        <span>
+          Приймаю{" "}
+          <Link
+            href="/legal/offer"
+            target="_blank"
+            className="text-[var(--accent-cyan)] underline-offset-2 hover:underline"
+          >
+            публічну оферту
+          </Link>{" "}
+          та{" "}
+          <Link
+            href="/legal/privacy"
+            target="_blank"
+            className="text-[var(--accent-cyan)] underline-offset-2 hover:underline"
+          >
+            політику конфіденційності
+          </Link>
+          .
+        </span>
+      </label>
+
       {error ? (
         <p className="text-sm text-[var(--accent-coral)]">{error}</p>
       ) : null}
 
-      <CourseButton type="submit" className="w-full" data-plan={plan.id}>
+      <CourseButton
+        type="submit"
+        className="w-full"
+        data-plan={plan.id}
+        disabled={!acceptedOffer || pending}
+      >
         {pending
           ? "Створюємо рахунок…"
           : `Оплатити ₴${plan.priceUah.toLocaleString("uk-UA")}`}

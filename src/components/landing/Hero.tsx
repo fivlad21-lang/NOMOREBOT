@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { BUILD_TIME, BRAND, expert, expertPhoto } from "@/data/course";
+import { BrandMark } from "./BrandMark";
+import { BUILD_TIME, expert, expertPhoto } from "@/data/course";
 import { CourseButton } from "./CourseButton";
 import { MetaChip } from "./MetaChip";
 
@@ -17,9 +18,7 @@ export function Hero({ subtitle }: Props) {
     >
       <div className="course-container grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
         <div className="hero-fade max-w-2xl">
-          <p className="course-display mb-4 text-4xl leading-none text-white sm:text-5xl md:text-6xl lg:text-7xl">
-            {BRAND}
-          </p>
+          <BrandMark size="hero" as="span" className="mb-4 leading-none" />
           <h1 className="course-display mb-5 text-3xl leading-[1.08] sm:text-4xl md:text-5xl">
             Сайт, який продає — за вечір, не за місяць
           </h1>

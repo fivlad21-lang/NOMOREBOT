@@ -1,4 +1,5 @@
-import { BRAND, BUILD_TIME } from "@/data/course";
+import { BUILD_TIME } from "@/data/course";
+import { BrandMark } from "./BrandMark";
 import { Reveal } from "./Reveal";
 
 const TIMELINE = ["Ідея", "Структура", "Дизайн", "Оплата"];
@@ -11,7 +12,7 @@ export function ProofBlock() {
           <div className="course-glass-strong overflow-hidden p-4 md:p-5">
             <div className="rounded-[18px] border border-white/10 bg-[#0a0f1c]/95 p-5 md:p-6">
               <div className="mb-6 flex items-center justify-between gap-3">
-                <span className="course-display text-lg">{BRAND}</span>
+                <BrandMark size="sm" as="span" />
                 <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-[var(--accent-lime)]">
                   live
                 </span>

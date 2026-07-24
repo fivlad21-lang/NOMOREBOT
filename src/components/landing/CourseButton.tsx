@@ -7,6 +7,7 @@ type Props = {
   variant?: "primary" | "secondary" | "ghost";
   type?: "button" | "submit";
   onClick?: () => void;
+  disabled?: boolean;
   "data-plan"?: string;
 };
 
@@ -21,6 +22,7 @@ export function CourseButton({
   variant = "primary",
   type = "button",
   onClick,
+  disabled,
   "data-plan": dataPlan,
 }: Props) {
   const classes = cx(
@@ -28,6 +30,7 @@ export function CourseButton({
     variant === "primary" && "course-btn--primary",
     variant === "secondary" && "course-btn--secondary",
     variant === "ghost" && "course-btn--ghost",
+    disabled && "pointer-events-none opacity-50",
     className,
   );
 
@@ -38,6 +41,7 @@ export function CourseButton({
         className={classes}
         data-plan={dataPlan}
         onClick={onClick}
+        aria-disabled={disabled || undefined}
       >
         {children}
       </Link>
@@ -50,6 +54,7 @@ export function CourseButton({
       className={classes}
       onClick={onClick}
       data-plan={dataPlan}
+      disabled={disabled}
     >
       {children}
     </button>

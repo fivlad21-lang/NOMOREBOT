@@ -18,7 +18,7 @@
 | Checkout → WayForPay invoice | є |
 | Thanks success по плану (канал/група/ментор) | є (1.2) |
 | Fail UI + POST return bridge | є (1.3), **prod PASS E1** |
-| Оферта / privacy / ФОП | заглушки |
+| Оферта / privacy / ФОП | є (E4); реквізити фізособи + IBAN, ФОП пізніше |
 | Persisted orders | код Redis/KV (E3); на проді увімкнути env |
 | Пікселі / email після оплати | немає |
 | Контент курсу в TG | поза кодом |
@@ -120,20 +120,32 @@ Vercel KV / Upstash Redis (або Postgres).
 
 ---
 
-# E4 — Юридичне
+# E4 — Юридичне + бренд .wtf
 
 ### Сторінки
 | URL | Зміст |
 | --- | --- |
 | `/legal/offer` | Публічна оферта |
 | `/legal/privacy` | Політика конфіденційності |
-| `/legal/requisites` (опційно) | ФОП реквізити |
+| `/legal/requisites` | Реквізити (ПІБ, ІПН, IBAN) |
 
 ### UI
-Footer з живими лінками; checkout checkbox «Приймаю оферту»; FAQ без «буде пізніше».
+- Footer з живими лінками
+- Checkout checkbox «Приймаю оферту»
+- FAQ з лінком на оферту
+- **BrandMark:** `NOMORE LAB` + маленьке `.wtf` (домен nomorelab.wtf)
 
-### Потрібно від власника
-ПІБ ФОП, ІПН/ЄДРПОУ, адреса, email претензій, фінальний текст повернення.
+### Реквізити (soft launch, не ФОП)
+- Фурман Владислав Іванович
+- ІПН/ЄДРПОУ `3752109313`
+- IBAN `UA713220010000026205360316289`
+
+### Acceptance
+- [x] Legal pages + checkbox + FAQ
+- [x] Brand `.wtf` у hero/header/footer/checkout
+- [x] Реквізити на `/legal/requisites`
+
+**Артефакт:** `TZ-NOMORE-LAB-2.0-E4.md`
 
 ---
 

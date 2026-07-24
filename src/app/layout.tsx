@@ -15,9 +15,12 @@ const unbounded = Unbounded({
 });
 
 export const metadata: Metadata = {
-  title: "NOMORE LAB — сайти для бізнесу",
+  title: "NOMORE LAB.wtf — сайти для бізнесу",
   description:
-    "Курс зі створення лендінгів і воронок для бізнесу: заявки, оплата, самостійні правки. Без залежності від агентства.",
+    "Курс зі створення лендінгів і воронок для бізнесу: заявки, оплата, самостійні правки. Без залежності від агентства. nomorelab.wtf",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://nomorelab.wtf",
+  ),
 };
 
 export default function RootLayout({
