@@ -33,14 +33,24 @@ export function CourseButton({
 
   if (href) {
     return (
-      <Link href={href} className={classes} data-plan={dataPlan}>
+      <Link
+        href={href}
+        className={classes}
+        data-plan={dataPlan}
+        onClick={onClick}
+      >
         {children}
       </Link>
     );
   }
 
   return (
-    <button type={type} className={classes} onClick={onClick} data-plan={dataPlan}>
+    <button
+      type={type}
+      className={classes}
+      onClick={onClick}
+      data-plan={dataPlan}
+    >
       {children}
     </button>
   );

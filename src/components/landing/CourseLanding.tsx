@@ -14,6 +14,7 @@ import { FinalCTA } from "./FinalCTA";
 import { LandingFooter } from "./LandingFooter";
 import { MobileStickyCTA } from "./MobileStickyCTA";
 import { OrbBackground } from "./OrbBackground";
+import { SideNav } from "./SideNav";
 
 type Props = {
   subtitle: string;
@@ -25,6 +26,7 @@ export function CourseLanding({ subtitle }: Props) {
       <OrbBackground />
       <div className="course-content">
         <LandingHeader />
+        <SideNav />
         <main>
           <Hero subtitle={subtitle} />
           <ProofStrip />

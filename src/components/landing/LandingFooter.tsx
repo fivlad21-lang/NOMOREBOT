@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BRAND } from "@/data/course";
+import { BRAND, contacts } from "@/data/course";
 
 export function LandingFooter() {
   return (
@@ -18,27 +18,30 @@ export function LandingFooter() {
           <ul className="space-y-2 text-sm text-[var(--text-muted)]">
             <li>
               <a
-                href="https://t.me/"
+                href={contacts.telegram}
                 className="hover:text-white"
                 target="_blank"
                 rel="noreferrer"
               >
-                Telegram
+                Telegram {contacts.telegramHandle}
               </a>
             </li>
             <li>
               <a
-                href="https://instagram.com/"
+                href={contacts.instagram}
                 className="hover:text-white"
                 target="_blank"
                 rel="noreferrer"
               >
-                Instagram
+                Instagram @nomorevlad
               </a>
             </li>
             <li>
-              <a href="mailto:hello@sitlab.example" className="hover:text-white">
-                hello@sitlab.example
+              <a
+                href={`mailto:${contacts.email}`}
+                className="hover:text-white"
+              >
+                {contacts.email}
               </a>
             </li>
           </ul>

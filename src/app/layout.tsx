@@ -15,7 +15,7 @@ const unbounded = Unbounded({
 });
 
 export const metadata: Metadata = {
-  title: "SITE LAB — курс зі створення сайтів",
+  title: "NOMORE LAB — курс зі створення сайтів",
   description:
     "Навчись збирати сучасні лендінги під TikTok, Instagram і Telegram. Цей сайт зібрано за 1 год 32 хв.",
 };

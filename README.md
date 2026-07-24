@@ -1,8 +1,9 @@
-# SITE LAB — лендінг курсу
+# NOMORE LAB — лендінг курсу
 
 Воронка продажу курсу зі створення сайтів (TikTok / Instagram / Telegram → оплата).
 
-Повне ТЗ: [`TZ-COURSE-LANDING.md`](./TZ-COURSE-LANDING.md).
+- ТЗ: [`TZ-COURSE-LANDING.md`](./TZ-COURSE-LANDING.md)
+- Апдейт: [`TZ-NOMORE-LAB-1.1.md`](./TZ-NOMORE-LAB-1.1.md)
 
 ## Запуск
 ```bash
@@ -14,9 +15,15 @@ npm run dev
 
 UTM-приклад: http://localhost:3000?from=tiktok
 
+## Контакти
+- Telegram: [@notany](https://t.me/notany)
+- Instagram: [nomorevlad](https://instagram.com/nomorevlad)
+- Email: fivlad.21@gmail.com
+
 ## Що всередині
 - Лендінг з glass UI, тарифами Start / Community / Mentor ($20 / $49 / $100)
 - Checkout + mock-оплата (`/api/pay/create`) → `/thanks`
+- Side nav + mobile menu
 - Демо нерухомості LEV Estates лишилось під `/ru`, `/en`, `/bg`
 
 ## Скрипти

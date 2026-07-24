@@ -1,4 +1,5 @@
-import { expert } from "@/data/course";
+import Image from "next/image";
+import { expert, expertPhoto } from "@/data/course";
 import { Reveal } from "./Reveal";
 
 export function Expert() {
@@ -7,19 +8,15 @@ export function Expert() {
       <div className="course-container">
         <Reveal>
           <div className="course-glass-strong grid overflow-hidden md:grid-cols-[0.9fr_1.1fr]">
-            <div className="relative min-h-[320px] bg-gradient-to-br from-[#1c2744] via-[#141d33] to-[#0c1324] md:min-h-full">
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "radial-gradient(circle at 40% 30%, rgba(62,224,255,0.28), transparent 50%), radial-gradient(circle at 70% 75%, rgba(255,90,106,0.22), transparent 45%)",
-                }}
+            <div className="relative min-h-[340px] md:min-h-[440px]">
+              <Image
+                src={expertPhoto}
+                alt={expert.name}
+                fill
+                sizes="(max-width: 768px) 100vw, 45vw"
+                className="object-cover object-[center_18%]"
               />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="flex h-44 w-44 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md md:h-52 md:w-52">
-                  <span className="course-display text-6xl text-white">В</span>
-                </div>
-              </div>
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b1020]/55 via-transparent to-[#0b1020]/2 md:bg-gradient-to-r md:from-transparent md:via-transparent md:to-[#0b1020]/45" />
             </div>
 
             <div className="p-6 md:p-10">

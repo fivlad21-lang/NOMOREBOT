@@ -1,4 +1,4 @@
-/* SITE LAB course theme — dark iOS glass */
+/* NOMORE LAB course theme — dark iOS glass */
 
 .course-theme {
   --bg-deep: #0b1020;
@@ -276,6 +276,12 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+}
+
+@media (min-width: 1024px) {
+  .course-container {
+    width: min(1120px, calc(100% - 5.5rem));
+  }
 }
 
 @media (min-width: 768px) {

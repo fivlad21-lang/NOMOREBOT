@@ -1,6 +1,6 @@
 import { CourseButton } from "@/components/landing/CourseButton";
 import { OrbBackground } from "@/components/landing/OrbBackground";
-import { BRAND, getPlan, type PlanId } from "@/data/course";
+import { BRAND, contacts, getPlan, type PlanId } from "@/data/course";
 
 type Props = {
   searchParams: Promise<{ plan?: string; order?: string }>;
@@ -48,20 +48,21 @@ export default async function ThanksPage({ searchParams }: Props) {
               )}
               {planId === "mentor" && (
                 <p>
-                  <strong className="text-white">Mentor:</strong> напиши мені в
-                  Telegram, щоб узгодити созвонни й розбір лендінгу.
+                  <strong className="text-white">Mentor:</strong> напиши{" "}
+                  {contacts.telegramHandle}, щоб узгодити созвонни й розбір
+                  лендінгу.
                 </p>
               )}
             </div>
 
             <div className="flex flex-wrap justify-center gap-3">
               {(planId === "community" || planId === "mentor") && (
-                <CourseButton href="https://t.me/" variant="primary">
+                <CourseButton href={contacts.telegram} variant="primary">
                   Відкрити Telegram
                 </CourseButton>
               )}
               {planId === "mentor" && (
-                <CourseButton href="https://t.me/" variant="secondary">
+                <CourseButton href={contacts.telegram} variant="secondary">
                   Написати мені
                 </CourseButton>
               )}

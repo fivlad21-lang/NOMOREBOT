@@ -1,6 +1,7 @@
 "use client";
 
-import { BUILD_TIME, BRAND, expert } from "@/data/course";
+import Image from "next/image";
+import { BUILD_TIME, BRAND, expert, expertPhoto } from "@/data/course";
 import { CourseButton } from "./CourseButton";
 import { MetaChip } from "./MetaChip";
 
@@ -10,7 +11,10 @@ type Props = {
 
 export function Hero({ subtitle }: Props) {
   return (
-    <section className="relative flex min-h-[100svh] items-center pb-16 pt-6 md:pb-24 md:pt-10">
+    <section
+      id="top"
+      className="relative flex min-h-[100svh] items-center scroll-mt-24 pb-16 pt-6 md:pb-24 md:pt-10"
+    >
       <div className="course-container grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
         <div className="hero-fade max-w-2xl">
           <p className="course-display mb-4 text-4xl leading-none text-white sm:text-5xl md:text-6xl lg:text-7xl">
@@ -38,20 +42,21 @@ export function Hero({ subtitle }: Props) {
 
         <div className="hero-fade hero-fade-delay relative mx-auto w-full max-w-md lg:justify-self-end">
           <div className="course-glass-strong overflow-hidden p-3">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[20px] bg-gradient-to-br from-[#1a2440] via-[#142033] to-[#0d1528]">
-              <div
-                className="absolute inset-0 opacity-80"
-                style={{
-                  background:
-                    "radial-gradient(circle at 30% 20%, rgba(62,224,255,0.35), transparent 45%), radial-gradient(circle at 80% 70%, rgba(255,90,106,0.3), transparent 40%)",
-                }}
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[20px]">
+              <Image
+                src={expertPhoto}
+                alt={expert.name}
+                fill
+                priority
+                sizes="(max-width: 768px) 90vw, 420px"
+                className="object-cover object-[center_20%]"
               />
-              <div className="absolute left-1/2 top-[28%] flex h-36 w-36 -translate-x-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md">
-                <span className="course-display text-4xl text-white">В</span>
-              </div>
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b1020]/95 via-[#0b1020]/25 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-5">
                 <div className="course-glass p-4">
-                  <p className="course-display text-xl text-white">{expert.name}</p>
+                  <p className="course-display text-xl text-white">
+                    {expert.name}
+                  </p>
                   <p className="mt-1 text-sm leading-snug text-[var(--text-muted)]">
                     {expert.role}
                   </p>

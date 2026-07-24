@@ -11,14 +11,13 @@ export function Testimonials() {
           </h2>
         </Reveal>
 
-        <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((item, i) => (
-            <Reveal
-              key={item.name}
-              delay={i * 50}
-              className="min-w-[82%] shrink-0 md:min-w-0"
-            >
+            <Reveal key={`${item.name}-${item.age}`} delay={i * 50}>
               <figure className="course-glass flex h-full flex-col p-5 md:p-6">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--accent-cyan)]">
+                  {item.pain}
+                </p>
                 <blockquote className="mb-6 flex-1 text-[var(--text-muted)] leading-relaxed">
                   “{item.quote}”
                 </blockquote>
@@ -28,7 +27,7 @@ export function Testimonials() {
                   </span>
                   <span>
                     <span className="block font-semibold text-white">
-                      {item.name}
+                      {item.name}, {item.age}
                     </span>
                     <span className="text-sm text-[var(--text-muted)]">
                       {item.niche}

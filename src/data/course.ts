@@ -12,9 +12,28 @@ export type Plan = {
   cta: string;
 };
 
-export const BRAND = "SITE LAB";
+export const BRAND = "NOMORE LAB";
 export const BUILD_TIME = "1 год 32 хв";
 export const MENTOR_SEATS = 8;
+
+export const contacts = {
+  telegram: "https://t.me/notany",
+  telegramHandle: "@notany",
+  instagram: "https://instagram.com/nomorevlad",
+  email: "fivlad.21@gmail.com",
+};
+
+export const expertPhoto = "/course/expert.png";
+
+export const navItems = [
+  { href: "#top", label: "Старт", id: "top" },
+  { href: "#program", label: "Програма", id: "program" },
+  { href: "#proof", label: "Результат", id: "proof" },
+  { href: "#expert", label: "Експерт", id: "expert" },
+  { href: "#reviews", label: "Відгуки", id: "reviews" },
+  { href: "#faq", label: "FAQ", id: "faq" },
+  { href: "#pricing", label: "Тарифи", id: "pricing" },
+] as const;
 
 export const plans: Plan[] = [
   {
@@ -162,42 +181,62 @@ export const expert = {
   ],
 };
 
-export const testimonials = [
+export type Testimonial = {
+  name: string;
+  age: number;
+  niche: string;
+  pain: string;
+  quote: string;
+};
+
+export const testimonials: Testimonial[] = [
   {
-    name: "Марина",
-    niche: "Бʼюті-майстер",
-    quote:
-      "За вечір зібрала лендінг під Reels. Наступного дня була перша заявка — без агентства.",
-  },
-  {
-    name: "Андрій",
+    name: "Марк",
+    age: 21,
     niche: "Фріланс",
+    pain: "хотів продавати",
     quote:
-      "Брав Community. У чаті скинули структуру — і я нарешті зрозумів, чому мій старий сайт не продавав.",
+      "Брав, бо хотів не просто «вчити html», а реально продавати сайти. Зібрав ленд за вечір, кинув другу — той скинув задаток. Це вже не теорія.",
   },
   {
-    name: "Олена",
-    niche: "Онлайн-школа",
+    name: "Оксана",
+    age: 45,
+    niche: "Свій бізнес",
+    pain: "хотіла зекономити",
     quote:
-      "Виглядає дорого. Клієнти перестали питати «а це Tilda?» — почали питати ціну.",
+      "Агентству ломить космос. Зробила сама під свій бізнес і досі кайфую, що не віддала пів зарплати за «шаблончик».",
+  },
+  {
+    name: "Денис",
+    age: 34,
+    niche: "Запуск оферу",
+    pain: "треба було швидко і доступно",
+    quote:
+      "Мені треба було вчора. Без води, без «модуль 40». Відкрив — зробив — залив. Найадекватніший шлях, який бачив.",
+  },
+  {
+    name: "Юля",
+    age: 28,
+    niche: "Онлайн-послуги",
+    pain: "сайт виглядав дешево",
+    quote:
+      "Мій старий сайт виглядав як 2017. Після курсу люди перестали питати «це конструктор?», почали питати прайс.",
   },
   {
     name: "Ігор",
-    niche: "SMM",
+    age: 31,
+    niche: "SMM / TikTok",
+    pain: "трафік був, продажів — нуль",
     quote:
-      "Після модуля з оплатою підключив LiqPay за годину. Воронка з TikTok закрилась у продаж.",
+      "Трафік був, сайту нормального — нуль. Підключив оплату по уроку і нарешті воронка закрилась у продаж, а не в «напишіть в дірект».",
   },
   {
     name: "Катя",
-    niche: "Mentor-тариф",
+    age: 26,
+    niche: "Mentor",
+    pain: "боялась застрягнути",
     quote:
-      "Розбір лендінгу на созвоні зекономив тиждень тикання. Переписала hero — конверсія виросла.",
-  },
-  {
-    name: "Тарас",
-    niche: "Перший сайт",
-    quote:
-      "Думав, що код — це космос. Зібрав свій перший лендінг і вже взяв замовлення в друга.",
+      "Сама б тиждень тикала. На розборі переписали hero — і заявки пішли. Якщо боїшся застрягнути — Mentor реально топ.",
   },
 ];
 
