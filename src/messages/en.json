@@ -1,0 +1,128 @@
+{
+  "meta": {
+    "title": "LEV Estates — Real Estate in Bulgaria",
+    "description": "LEV Estates demo showcase: catalog, map and filters."
+  },
+  "nav": {
+    "home": "Home",
+    "properties": "Properties",
+    "about": "About",
+    "contacts": "Contacts",
+    "selection": "Property matching"
+  },
+  "common": {
+    "hot": "Hot",
+    "from": "from",
+    "to": "to",
+    "reset": "Reset",
+    "apply": "Apply",
+    "details": "Details",
+    "ask": "Enquire",
+    "viewAll": "View all",
+    "demoBadge": "DEMO",
+    "demoNote": "Mock data. After approval we will connect your CRM via API.",
+    "phone": "+359 877 840 262",
+    "email": "info@levestates.com",
+    "studio": "Studio",
+    "m2": "m²",
+    "floor": "floor",
+    "noResults": "No results found",
+    "resetFilters": "Reset filters",
+    "showMore": "Show more",
+    "similar": "Similar properties",
+    "backToCatalog": "Back to catalog"
+  },
+  "home": {
+    "heroTitle": "Real estate in Bulgaria",
+    "heroSubtitle": "A modern property showcase with map, filters and multilingual UI — demo of the future LEV Estates website.",
+    "ctaCatalog": "Browse properties",
+    "ctaSelection": "Request matching",
+    "hotTitle": "Hot offers",
+    "locationsTitle": "Choose a location",
+    "whyTitle": "Why LEV Estates",
+    "why1Title": "Local expertise",
+    "why1Text": "Resort and city properties across the Burgas region.",
+    "why2Title": "Clear catalog",
+    "why2Text": "Map and list search with prices and photos from your CRM.",
+    "why3Title": "Multilingual service",
+    "why3Text": "RU / EN / BG interface and translated property descriptions.",
+    "selectionTitle": "Didn't find what you need?",
+    "selectionText": "Request a free shortlist — in this demo the form is stored locally."
+  },
+  "locations": {
+    "sunny_beach": "Sunny Beach",
+    "sveti_vlas": "Sveti Vlas",
+    "burgas": "Burgas",
+    "ravda": "Ravda",
+    "kosharitsa": "Kosharitsa",
+    "burgas_region": "Burgas region",
+    "other": "Other"
+  },
+  "types": {
+    "apartment": "Apartment",
+    "house": "House",
+    "land": "Land",
+    "commercial": "Commercial"
+  },
+  "catalog": {
+    "title": "Property catalog",
+    "subtitle": "Filters, map and list — like modern property portals.",
+    "filters": "Filters",
+    "location": "Location",
+    "type": "Type",
+    "price": "Price, EUR",
+    "rooms": "Rooms",
+    "hotOnly": "Hot only",
+    "sort": "Sort",
+    "sortNewest": "Newest",
+    "sortPriceAsc": "Price ↑",
+    "sortPriceDesc": "Price ↓",
+    "sortAreaDesc": "Area ↓",
+    "viewGrid": "Grid",
+    "viewList": "List",
+    "viewMap": "Map",
+    "results": "{count} properties",
+    "searchPlaceholder": "Search by title or address"
+  },
+  "property": {
+    "price": "Price",
+    "specs": "Specs",
+    "description": "Description",
+    "location": "Location",
+    "askTitle": "Enquire about this property",
+    "rooms": "Rooms",
+    "area": "Area",
+    "type": "Type"
+  },
+  "about": {
+    "title": "About",
+    "p1": "LEV Estates is a real-estate agency in Bulgaria. This is a demo of the new showcase: a fast site with no heavy admin — listings will sync from your CRM.",
+    "p2": "Focus: clear search, map browsing and multilingual service for international buyers."
+  },
+  "contacts": {
+    "title": "Contacts",
+    "subtitle": "Get in touch — in this demo the form shows a success state without CRM.",
+    "address": "Bulgaria, Burgas region"
+  },
+  "form": {
+    "name": "Name",
+    "phone": "Phone / Telegram",
+    "email": "Email",
+    "budget": "Budget, EUR",
+    "location": "Preferred location",
+    "type": "Property type",
+    "comment": "Comment",
+    "consent": "I agree to data processing (demo)",
+    "submit": "Send",
+    "success": "Request accepted (demo). In production it will go to CRM / Telegram.",
+    "required": "Required field"
+  },
+  "selection": {
+    "title": "Request property matching",
+    "subtitle": "Describe your brief — we will shortlist options for free (in production the lead goes into your system)."
+  },
+  "footer": {
+    "rights": "© LEV Estates. Demo showcase.",
+    "tagline": "Black Sea coast property showcase"
+  }
+}
