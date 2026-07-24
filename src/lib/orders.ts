@@ -38,6 +38,19 @@ export function markOrderPaid(orderReference: string) {
   return next;
 }
 
+export function markOrderFailed(orderReference: string) {
+  const current = store().get(orderReference);
+  if (!current) return null;
+  if (current.status === "paid") return current;
+  const next = {
+    ...current,
+    status: "failed" as const,
+    updatedAt: Date.now(),
+  };
+  store().set(orderReference, next);
+  return next;
+}
+
 export function markProvisioned(orderReference: string) {
   const current = store().get(orderReference);
   if (!current) return null;

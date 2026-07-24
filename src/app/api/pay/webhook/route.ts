@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getPlan } from "@/data/course";
 import {
   getOrder,
+  markOrderFailed,
   markOrderPaid,
   markProvisioned,
   saveOrder,
@@ -77,6 +78,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Amount mismatch" }, { status: 400 });
   }
 
+  const tx = (payload.transactionStatus || "").toLowerCase();
   if (payload.transactionStatus === "Approved") {
     const paid = markOrderPaid(orderReference) || order;
     if (paid && !paid.provisioned) {
@@ -90,6 +92,18 @@ export async function POST(request: Request) {
       // TODO: send email + TG invite automation
       markProvisioned(orderReference);
     }
+  } else if (
+    tx === "declined" ||
+    tx === "expired" ||
+    tx === "refunded" ||
+    tx === "voided"
+  ) {
+    markOrderFailed(orderReference);
+    console.info("[pay.webhook] FAILED", {
+      orderReference,
+      transactionStatus: payload.transactionStatus,
+      reasonCode: payload.reasonCode,
+    });
   } else {
     console.info("[pay.webhook] status", {
       orderReference,
