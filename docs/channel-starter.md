@@ -74,3 +74,20 @@ NOMORE LAB — курс зі сайтів під TikTok / IG / Telegram
 ```
 Привіт! Я [імʼя], ніша — […]. Збираю ленд під [офер]. Застряг на […].
 ```
+
+---
+
+## Soft launch DM (E9)
+
+```
+Зібрав курс NOMORE LAB — як зробити лендінг під TikTok і приймати оплату.
+
+Зараз soft launch для своїх: Start $20 / Community $49 / Mentor $100.
+Без реклами — потрібен фідбек по оплаті й доступу.
+
+Лінк: https://nomorebot.vercel.app/?from=telegram&utm_source=soft&utm_medium=dm&utm_campaign=e9
+
+Якщо щось зламається — пиши @notany з номером замовлення.
+```
+
+Повний чекліст: [`SOFT-LAUNCH.md`](./SOFT-LAUNCH.md)

@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "smoke:wfp": "node scripts/e2-wfp-smoke.mjs",
-    "smoke:orders": "node scripts/e3-orders-smoke.mjs"
+    "smoke:orders": "node scripts/e3-orders-smoke.mjs",
+    "smoke:soft-launch": "node scripts/e9-soft-launch-smoke.mjs"
   },
   "dependencies": {
     "@upstash/redis": "^1.38.0",

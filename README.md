@@ -8,6 +8,7 @@
 - Orders persistence: [`docs/ORDERS-PERSISTENCE.md`](./docs/ORDERS-PERSISTENCE.md)
 - Access ops: [`docs/ACCESS-OPS.md`](./docs/ACCESS-OPS.md)
 - Analytics / UTM / pixels: [`docs/ANALYTICS.md`](./docs/ANALYTICS.md)
+- Soft launch: [`docs/SOFT-LAUNCH.md`](./docs/SOFT-LAUNCH.md)
 
 ## Запуск
 ```bash
@@ -66,3 +67,4 @@ npm run smoke:wfp
 - `npm run lint` — eslint
 - `npm run smoke:wfp` — E2 WayForPay test_merch smoke
 - `npm run smoke:orders` — E3 orders backend env smoke
+- `npm run smoke:soft-launch` — E9 preflight HTTP smoke (`SITE_URL=…`)

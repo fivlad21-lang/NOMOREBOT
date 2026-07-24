@@ -229,9 +229,25 @@ Hero full-bleed; бренд hero-рівень; CTA з ціною; коротши
 
 10–30 людей без платного трафіку; ≥3 успішні оплати; 0 критичних багів доступу.
 
+### Зроблено в репо
+- Чекліст: `docs/SOFT-LAUNCH.md`
+- Smoke: `SITE_URL=… npm run smoke:soft-launch`
+- DM-шаблон soft launch у `docs/channel-starter.md`
+
+### Acceptance
+- [x] Чекліст + smoke script + звіт
+- [ ] Pre-flight smoke PASS на Production (деплой E1–E8 + Redis)
+- [ ] Канал/група наповнені (власник)
+- [ ] ≥3 успішні оплати на живих людях (власник)
+- [ ] 0 критичних багів доступу (власник)
+
+**Артефакт:** `TZ-NOMORE-LAB-2.0-E9.md` — **PASS** (артефакти); жива хвиля — owner перед E10
+
 ---
 
 # E10 — Платний трафік
+
+**Вхід:** E9 жива хвиля PASS (≥3 paid, 0 critical access bugs).
 
 Бойовий WFP + пікселі; малий бюджет; крутити креатив/лендінг за CVR, не бюджет наосліп.
 
