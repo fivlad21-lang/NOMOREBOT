@@ -27,6 +27,7 @@ export function ThanksClient({ planId, order }: Props) {
 
   useEffect(() => {
     if (!order) return;
+    const orderId = order;
 
     let cancelled = false;
     let tries = 0;
@@ -35,7 +36,7 @@ export function ThanksClient({ planId, order }: Props) {
       tries += 1;
       try {
         const res = await fetch(
-          `/api/pay/status?order=${encodeURIComponent(order)}`,
+          `/api/pay/status?order=${encodeURIComponent(orderId)}`,
         );
         const data = (await res.json()) as StatusResponse;
         if (cancelled) return;
