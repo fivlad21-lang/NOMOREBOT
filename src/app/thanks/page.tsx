@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { CourseButton } from "@/components/landing/CourseButton";
 import { OrbBackground } from "@/components/landing/OrbBackground";
 import { BRAND, getPlan, type PlanId } from "@/data/course";
