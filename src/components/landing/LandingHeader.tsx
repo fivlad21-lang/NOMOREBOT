@@ -85,7 +85,7 @@ export function LandingHeader() {
                   key={item.id}
                   href={item.href}
                   onClick={() => setMenuOpen(false)}
-                  className="rounded-2xl px-3 py-3 text-base text-white/85 transition hover:bg-white/8 hover:text-white"
+                  className="rounded-2xl px-3 py-3 text-base font-semibold text-white/85 transition hover:bg-white/8 hover:text-white"
                 >
                   {item.label}
                 </a>

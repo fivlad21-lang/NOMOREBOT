@@ -49,7 +49,7 @@ export default async function ThanksPage({ searchParams }: Props) {
               {planId === "mentor" && (
                 <p>
                   <strong className="text-white">Mentor:</strong> напиши{" "}
-                  {contacts.telegramHandle}, щоб узгодити созвонни й розбір
+                  {contacts.telegramHandle}, щоб узгодити дзвінки й розбір
                   лендінгу.
                 </p>
               )}

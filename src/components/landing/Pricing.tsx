@@ -7,7 +7,7 @@ export function Pricing() {
     <section id="pricing" className="course-section scroll-mt-24">
       <div className="course-container">
         <Reveal>
-          <h2 className="course-display mb-3 text-center text-3xl md:text-4xl">
+          <h2 className="course-heading mb-3 text-center text-3xl md:text-4xl">
             Обери свій тариф
           </h2>
           <p className="mx-auto mb-10 max-w-xl text-center text-[var(--text-muted)]">

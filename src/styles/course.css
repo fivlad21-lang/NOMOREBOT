@@ -164,6 +164,12 @@
   font-weight: 700;
 }
 
+.course-heading {
+  font-family: var(--font-body);
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
 .course-muted {
   color: var(--text-muted);
 }

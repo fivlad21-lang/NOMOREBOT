@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { navItems } from "@/data/course";
 
 export function SideNav() {
   const [active, setActive] = useState<string>("top");
+  const locked = useRef(false);
+  const unlockTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const ids = navItems.map((item) => item.id);
@@ -16,22 +18,45 @@ export function SideNav() {
 
     const io = new IntersectionObserver(
       (entries) => {
+        if (locked.current) return;
+
         const visible = entries
           .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+          .sort((a, b) => {
+            const aTop = Math.abs(
+              a.boundingClientRect.top - window.innerHeight * 0.28,
+            );
+            const bTop = Math.abs(
+              b.boundingClientRect.top - window.innerHeight * 0.28,
+            );
+            return aTop - bTop;
+          });
+
         if (visible[0]?.target?.id) {
           setActive(visible[0].target.id);
         }
       },
       {
-        rootMargin: "-25% 0px -55% 0px",
-        threshold: [0.1, 0.25, 0.5],
+        rootMargin: "-20% 0px -55% 0px",
+        threshold: [0.05, 0.15, 0.35, 0.55],
       },
     );
 
     elements.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+    return () => {
+      io.disconnect();
+      if (unlockTimer.current) clearTimeout(unlockTimer.current);
+    };
   }, []);
+
+  function onNavClick(id: string) {
+    setActive(id);
+    locked.current = true;
+    if (unlockTimer.current) clearTimeout(unlockTimer.current);
+    unlockTimer.current = setTimeout(() => {
+      locked.current = false;
+    }, 900);
+  }
 
   return (
     <nav
@@ -47,9 +72,12 @@ export function SideNav() {
               href={item.href}
               title={item.label}
               aria-current={isActive ? "true" : undefined}
+              onClick={() => onNavClick(item.id)}
               className={[
                 "group flex items-center gap-2 rounded-2xl px-2.5 py-2 transition",
-                isActive ? "bg-white/12 text-white" : "text-white/55 hover:bg-white/8 hover:text-white",
+                isActive
+                  ? "bg-white/12 text-white"
+                  : "text-white/55 hover:bg-white/8 hover:text-white",
               ].join(" ")}
             >
               <span
@@ -60,7 +88,7 @@ export function SideNav() {
                     : "bg-white/35 group-hover:bg-white/70",
                 ].join(" ")}
               />
-              <span className="course-display max-w-0 overflow-hidden text-xs tracking-wide whitespace-nowrap opacity-0 transition-all duration-300 group-hover:max-w-[7rem] group-hover:opacity-100 xl:max-w-[7rem] xl:opacity-100">
+              <span className="max-w-0 overflow-hidden text-xs font-semibold tracking-wide whitespace-nowrap opacity-0 transition-all duration-300 group-hover:max-w-[7rem] group-hover:opacity-100 xl:max-w-[7rem] xl:opacity-100">
                 {item.label}
               </span>
             </a>

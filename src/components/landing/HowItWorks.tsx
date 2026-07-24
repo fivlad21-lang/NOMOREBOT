@@ -6,7 +6,7 @@ export function HowItWorks() {
     <section className="course-section">
       <div className="course-container">
         <Reveal>
-          <h2 className="course-display mb-10 text-3xl md:text-4xl">
+          <h2 className="course-heading mb-10 text-3xl md:text-4xl">
             Як це працює
           </h2>
         </Reveal>
@@ -18,7 +18,7 @@ export function HowItWorks() {
                 <p className="course-display mb-3 text-4xl text-white/25">
                   {step.n}
                 </p>
-                <h3 className="course-display mb-2 text-xl">{step.title}</h3>
+                <h3 className="course-heading mb-2 text-xl">{step.title}</h3>
                 <p className="text-[var(--text-muted)] leading-relaxed">
                   {step.text}
                 </p>

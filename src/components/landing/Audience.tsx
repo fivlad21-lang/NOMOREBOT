@@ -6,7 +6,7 @@ export function Audience() {
     <section className="course-section">
       <div className="course-container">
         <Reveal>
-          <h2 className="course-display mb-10 text-3xl md:text-4xl">
+          <h2 className="course-heading mb-10 text-3xl md:text-4xl">
             Для кого цей курс
           </h2>
         </Reveal>

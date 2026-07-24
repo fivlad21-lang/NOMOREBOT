@@ -6,7 +6,7 @@ export function FAQ() {
     <section id="faq" className="course-section scroll-mt-24">
       <div className="course-container max-w-3xl">
         <Reveal>
-          <h2 className="course-display mb-8 text-3xl md:text-4xl">FAQ</h2>
+          <h2 className="course-heading mb-8 text-3xl md:text-4xl">FAQ</h2>
         </Reveal>
 
         <div className="course-faq course-glass px-5 md:px-6">

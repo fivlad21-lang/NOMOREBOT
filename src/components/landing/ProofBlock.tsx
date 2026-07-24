@@ -30,7 +30,7 @@ export function ProofBlock() {
 
         <Reveal delay={100}>
           <div>
-            <h2 className="course-display mb-4 text-3xl md:text-4xl">
+            <h2 className="course-heading mb-4 text-3xl md:text-4xl">
               Цей сайт — доказ
             </h2>
             <p className="mb-8 max-w-lg text-[var(--text-muted)] leading-relaxed">

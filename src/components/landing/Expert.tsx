@@ -23,7 +23,7 @@ export function Expert() {
               <p className="mb-2 text-sm uppercase tracking-[0.16em] text-[var(--accent-cyan)]">
                 Експерт
               </p>
-              <h2 className="course-display mb-2 text-3xl md:text-4xl">
+              <h2 className="course-heading mb-2 text-3xl md:text-4xl">
                 {expert.name}
               </h2>
               <p className="mb-6 text-lg text-white/90">{expert.role}</p>

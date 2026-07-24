@@ -15,9 +15,9 @@ const unbounded = Unbounded({
 });
 
 export const metadata: Metadata = {
-  title: "NOMORE LAB — курс зі створення сайтів",
+  title: "NOMORE LAB — сайти для бізнесу",
   description:
-    "Навчись збирати сучасні лендінги під TikTok, Instagram і Telegram. Цей сайт зібрано за 1 год 32 хв.",
+    "Курс зі створення лендінгів і воронок для бізнесу: заявки, оплата, самостійні правки. Без залежності від агентства.",
 };
 
 export default function RootLayout({

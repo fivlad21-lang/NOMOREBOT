@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { testimonials } from "@/data/course";
 import { Reveal } from "./Reveal";
 
@@ -6,7 +7,7 @@ export function Testimonials() {
     <section id="reviews" className="course-section scroll-mt-24">
       <div className="course-container">
         <Reveal>
-          <h2 className="course-display mb-10 text-3xl md:text-4xl">
+          <h2 className="mb-10 text-3xl font-bold tracking-tight text-white md:text-4xl">
             Відгуки учнів
           </h2>
         </Reveal>
@@ -18,12 +19,18 @@ export function Testimonials() {
                 <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--accent-cyan)]">
                   {item.pain}
                 </p>
-                <blockquote className="mb-6 flex-1 text-[var(--text-muted)] leading-relaxed">
+                <blockquote className="mb-6 flex-1 text-[15px] leading-relaxed text-[var(--text-muted)] md:text-base">
                   “{item.quote}”
                 </blockquote>
                 <figcaption className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-sm font-semibold text-white">
-                    {item.name.slice(0, 1)}
+                  <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border border-white/15 bg-white/10">
+                    <Image
+                      src={item.avatar}
+                      alt={item.name}
+                      fill
+                      sizes="44px"
+                      className="object-cover"
+                    />
                   </span>
                   <span>
                     <span className="block font-semibold text-white">

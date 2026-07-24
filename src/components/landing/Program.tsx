@@ -6,7 +6,7 @@ export function Program() {
     <section id="program" className="course-section scroll-mt-24">
       <div className="course-container">
         <Reveal>
-          <h2 className="course-display mb-3 text-3xl md:text-4xl">
+          <h2 className="course-heading mb-3 text-3xl md:text-4xl">
             Що отримаєш
           </h2>
           <p className="mb-10 max-w-2xl text-[var(--text-muted)]">
@@ -22,7 +22,7 @@ export function Program() {
                   <span className="text-sm text-[var(--accent-cyan)]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="course-display text-lg text-white md:text-xl">
+                  <h3 className="course-heading text-lg text-white md:text-xl">
                     {mod.title}
                   </h3>
                 </div>
