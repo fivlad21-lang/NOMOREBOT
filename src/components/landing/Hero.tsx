@@ -34,7 +34,7 @@ export function Hero({ subtitle }: Props) {
             NOMORE LAB
           </p>
           <h1 className="course-display mb-5 max-w-3xl text-3xl leading-[1.12] sm:text-4xl md:text-[2.65rem] md:leading-[1.15] lg:text-5xl">
-            Збери лендінг під TikTok за вечір — і приймай оплату
+            Зроби сайт під свої потреби за вечір.
           </h1>
           <p className="mb-7 max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:text-lg">
             {subtitle}
@@ -49,7 +49,7 @@ export function Hero({ subtitle }: Props) {
 
           <div className="flex flex-wrap items-center gap-3">
             <MetaChip>
-              Цей лендінг {BRAND} зібрано за{" "}
+              Цей сайт {BRAND} зібрано за{" "}
               <strong className="font-semibold text-white">{BUILD_TIME}</strong>
             </MetaChip>
             <p className="text-xs text-white/45 md:text-sm">

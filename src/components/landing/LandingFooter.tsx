@@ -10,8 +10,8 @@ export function LandingFooter() {
         <div>
           <BrandMark size="md" href="/#top" />
           <p className="mt-2 max-w-sm text-sm text-[var(--text-muted)]">
-            Курс зі створення сайтів і лендінгів під трафік з TikTok, Instagram і
-            Telegram. Домен: {DOMAIN}
+            Курс зі створення сайтів під свої потреби — без агентства. Домен:{" "}
+            {DOMAIN}
           </p>
         </div>
 

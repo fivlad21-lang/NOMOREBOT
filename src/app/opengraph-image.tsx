@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "NOMORE LAB — курс сайтів і лендінгів для бізнесу";
+export const alt = "NOMORE LAB — курс сайтів для бізнесу";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -42,11 +42,12 @@ export default function OpenGraphImage() {
           <div
             style={{
               display: "flex",
-              flexDirection: "column",
-              fontSize: 96,
+              flexDirection: "row",
+              fontSize: 88,
               lineHeight: 0.95,
               fontWeight: 800,
               letterSpacing: -2,
+              gap: 24,
             }}
           >
             <span>NOMORE</span>
@@ -70,7 +71,7 @@ export default function OpenGraphImage() {
               color: "#f8fafc",
             }}
           >
-            Збери лендінг під TikTok за вечір — і приймай оплату
+            Зроби сайт під свої потреби за вечір.
           </div>
           <div
             style={{
@@ -79,7 +80,7 @@ export default function OpenGraphImage() {
               lineHeight: 1.35,
             }}
           >
-            Курс сайтів і воронок для бізнесу · Start / Community / Mentor
+            Курс сайтів для бізнесу · Start / Community / Mentor
           </div>
         </div>
       </div>

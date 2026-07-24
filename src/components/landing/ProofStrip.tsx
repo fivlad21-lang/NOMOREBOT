@@ -7,13 +7,13 @@ export function ProofStrip() {
       <Reveal>
         <div className="course-glass flex flex-wrap items-center justify-center gap-x-6 gap-y-2 px-5 py-4 text-center text-sm text-[var(--text-muted)] md:text-base">
           <span>
-            Цей лендінг зібрано за{" "}
+            Цей сайт зібрано за{" "}
             <strong className="text-white">{BUILD_TIME}</strong>
           </span>
           <span className="hidden text-white/20 sm:inline">·</span>
           <span>
-            Воронка до <strong className="text-white">оплати</strong>, не до
-            «напишіть в дірект»
+            Готовий <strong className="text-white">сайт</strong>, не макет «на
+            потім»
           </span>
           <span className="hidden text-white/20 sm:inline">·</span>
           <span>

@@ -9,7 +9,7 @@ export function FinalCTA() {
       <div className="course-container text-center">
         <Reveal>
           <h2 className="course-display mx-auto mb-4 max-w-3xl text-3xl md:text-5xl">
-            Готовий зібрати свій лендінг?
+            Готовий зробити свій сайт?
           </h2>
           <p className="mx-auto mb-8 max-w-xl text-[var(--text-muted)]">
             Обери тариф і пройди той самий шлях, яким зібрано цей сайт — за{" "}

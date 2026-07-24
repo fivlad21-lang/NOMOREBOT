@@ -21,12 +21,12 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nomorelab.wtf";
 export const metadata: Metadata = {
   title: "NOMORE LAB — сайти для бізнесу",
   description:
-    "Курс зі створення лендінгів і воронок для бізнесу: заявки, оплата, самостійні правки. Без залежності від агентства. nomorelab.wtf",
+    "Курс зі створення сайтів під свої потреби: структура, дизайн, запуск і правки без агентства. Зроби сайт за вечір. nomorelab.wtf",
   metadataBase: new URL(siteUrl),
   openGraph: {
     title: "NOMORE LAB — сайти для бізнесу",
     description:
-      "Збери лендінг під TikTok за вечір — і приймай оплату. Курс сайтів і воронок для бізнесу.",
+      "Зроби сайт під свої потреби за вечір. Курс сайтів для бізнесу — без агентства.",
     url: siteUrl,
     siteName: "NOMORE LAB",
     locale: "uk_UA",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "NOMORE LAB — сайти для бізнесу",
     description:
-      "Збери лендінг під TikTok за вечір — і приймай оплату. Курс сайтів і воронок для бізнесу.",
+      "Зроби сайт під свої потреби за вечір. Курс сайтів для бізнесу — без агентства.",
   },
 };
 

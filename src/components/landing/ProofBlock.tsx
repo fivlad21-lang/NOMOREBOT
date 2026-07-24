@@ -2,10 +2,10 @@ import { BUILD_TIME, BRAND } from "@/data/course";
 import { Reveal } from "./Reveal";
 
 const TIMELINE = [
-  { label: "Ідея", hint: "офер" },
+  { label: "Ідея", hint: "задачі" },
   { label: "Структура", hint: "блоки" },
-  { label: "UI", hint: "glass" },
-  { label: "Оплата", hint: "live" },
+  { label: "UI", hint: "вигляд" },
+  { label: "Запуск", hint: "live" },
 ];
 
 export function ProofBlock() {
@@ -17,13 +17,13 @@ export function ProofBlock() {
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent-cyan)]">
               Meta-proof
             </p>
-            <p className="course-display mt-4 text-white/50">Цей лендінг</p>
+            <p className="course-display mt-4 text-white/50">Цей сайт</p>
             <p className="course-display mt-1 text-5xl leading-none text-white md:text-6xl">
               {BUILD_TIME}
             </p>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-[var(--text-muted)]">
-              Не макет «на потім». Сторінка курсу зібрана тим самим підходом, якому
-              вчимо — від ідеї до кнопки оплати.
+              Не макет «на потім». Сторінка курсу зібрана тим самим підходом,
+              якому вчимо — від ідеї до запущеного сайту.
             </p>
             <div className="mt-8 flex flex-wrap gap-2">
               {TIMELINE.map((step, index) => (
@@ -49,8 +49,8 @@ export function ProofBlock() {
               Сайт сам себе доводить
             </h2>
             <p className="mb-6 max-w-lg text-[var(--text-muted)] leading-relaxed">
-              {BRAND} — не слайди теорії. Ти бачиш робочу воронку: структура,
-              UI, тарифи, checkout. У курсі — той самий сценарій під твій офер.
+              {BRAND} — не слайди теорії. Ти бачиш робочий сайт: структура, UI,
+              тарифи, checkout. У курсі — той самий сценарій під твої потреби.
             </p>
             <ul className="space-y-3 text-sm text-[var(--text-muted)]">
               <li className="flex gap-2">
@@ -59,7 +59,7 @@ export function ProofBlock() {
               </li>
               <li className="flex gap-2">
                 <span className="text-[var(--accent-lime)]">✓</span>
-                Блоки в порядку увага → довіра → оплата
+                Блоки: структура → довіра → дія
               </li>
               <li className="flex gap-2">
                 <span className="text-[var(--accent-lime)]">✓</span>
