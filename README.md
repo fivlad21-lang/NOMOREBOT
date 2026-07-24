@@ -9,6 +9,7 @@
 - Access ops: [`docs/ACCESS-OPS.md`](./docs/ACCESS-OPS.md)
 - Analytics / UTM / pixels: [`docs/ANALYTICS.md`](./docs/ANALYTICS.md)
 - Soft launch: [`docs/SOFT-LAUNCH.md`](./docs/SOFT-LAUNCH.md)
+- Pricing FX (USD→UAH): [`docs/PRICING-FX.md`](./docs/PRICING-FX.md)
 
 ## Запуск
 ```bash

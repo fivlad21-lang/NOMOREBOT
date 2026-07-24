@@ -63,7 +63,7 @@ export default function OfferPage() {
         <ul className="list-disc space-y-1 pl-5">
           {plans.map((p) => (
             <li key={p.id}>
-              <strong className="text-white">{p.name}</strong> — ${p.priceUsd} / ≈ ₴
+              <strong className="text-white">{p.name}</strong> — ${p.priceUsd} / ₴
               {p.priceUah.toLocaleString("uk-UA")}
             </li>
           ))}

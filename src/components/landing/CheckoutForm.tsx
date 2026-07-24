@@ -96,7 +96,7 @@ export function CheckoutForm({ planId, attribution }: Props) {
             {plan.name} — ${plan.priceUsd}
           </h1>
           <p className="mt-1 text-sm text-[var(--text-muted)]">
-            До сплати ≈ ₴{plan.priceUah.toLocaleString("uk-UA")} через WayForPay
+            До сплати ₴{plan.priceUah.toLocaleString("uk-UA")} через WayForPay
           </p>
         </div>
 

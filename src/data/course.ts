@@ -1,3 +1,5 @@
+import { uahFromUsd } from "@/data/pricing";
+
 export type PlanId = "start" | "community" | "mentor";
 
 export type Plan = {
@@ -68,7 +70,7 @@ export const plans: Plan[] = [
     id: "start",
     name: "Start",
     priceUsd: 20,
-    priceUah: 820,
+    priceUah: uahFromUsd(20),
     tone: "quiet",
     forWhom: "Для тих, хто розбирається сам",
     features: [
@@ -83,7 +85,7 @@ export const plans: Plan[] = [
     id: "community",
     name: "Community",
     priceUsd: 49,
-    priceUah: 2010,
+    priceUah: uahFromUsd(49),
     badge: "Найчастіший вибір",
     highlighted: true,
     tone: "featured",
@@ -100,7 +102,7 @@ export const plans: Plan[] = [
     id: "mentor",
     name: "Mentor",
     priceUsd: 100,
-    priceUah: 4100,
+    priceUah: uahFromUsd(100),
     badge: `Лише ${MENTOR_SEATS} місць`,
     tone: "accent",
     forWhom: "Для тих, хто хоче супровід 1:1",
@@ -116,6 +118,10 @@ export const plans: Plan[] = [
 
 export function getPlan(id: string | null | undefined): Plan | undefined {
   return plans.find((p) => p.id === id);
+}
+
+export function lowestPlanPriceUah(): number {
+  return Math.min(...plans.map((p) => p.priceUah));
 }
 
 export const modules = [

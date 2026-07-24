@@ -66,7 +66,7 @@ export function Pricing() {
                       ${plan.priceUsd}
                     </p>
                     <p className="mt-1 text-sm text-[var(--text-muted)]">
-                      ≈ ₴{plan.priceUah.toLocaleString("uk-UA")}
+                      ₴{plan.priceUah.toLocaleString("uk-UA")}
                     </p>
                   </div>
 
