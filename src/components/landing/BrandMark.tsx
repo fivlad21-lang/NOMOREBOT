@@ -49,7 +49,8 @@ export function BrandMark({
       <span>{BRAND}</span>
       {withTld ? (
         <span
-          className={`ml-[0.12em] translate-y-[0.12em] font-medium leading-none text-white/55 ${sizes.tld}`}
+          aria-hidden="true"
+          className={`ml-[0.14em] translate-y-[0.18em] font-semibold leading-none text-[var(--accent-cyan)] ${sizes.tld}`}
         >
           .wtf
         </span>
