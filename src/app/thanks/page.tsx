@@ -1,78 +1,29 @@
-import { CourseButton } from "@/components/landing/CourseButton";
-import { OrbBackground } from "@/components/landing/OrbBackground";
-import { BRAND, contacts, getPlan, type PlanId } from "@/data/course";
+import { ThanksClient } from "@/components/landing/ThanksClient";
+import { getPlan, type PlanId } from "@/data/course";
 
 type Props = {
   searchParams: Promise<{ plan?: string; order?: string }>;
 };
 
+const PLAN_IDS: PlanId[] = ["start", "community", "mentor"];
+
+function isPlanId(value: string | undefined): value is PlanId {
+  return !!value && PLAN_IDS.includes(value as PlanId);
+}
+
 export default async function ThanksPage({ searchParams }: Props) {
   const params = await searchParams;
-  const plan = getPlan(params.plan) ?? getPlan("community")!;
-  const planId = plan.id as PlanId;
+  const fromOrder = params.order?.startsWith("NL-")
+    ? params.order.split("-")[1]
+    : undefined;
+  const planId = isPlanId(params.plan)
+    ? params.plan
+    : isPlanId(fromOrder)
+      ? fromOrder
+      : "community";
 
-  return (
-    <div className="course-theme course-shell min-h-screen">
-      <OrbBackground />
-      <div className="course-content">
-        <div className="course-container flex min-h-screen items-center py-16">
-          <div className="course-glass-strong mx-auto max-w-2xl p-8 text-center md:p-12">
-            <p className="mb-3 text-sm uppercase tracking-[0.16em] text-[var(--accent-lime)]">
-              Оплату прийнято
-            </p>
-            <h1 className="course-display mb-4 text-3xl md:text-5xl">
-              Вітаю в {BRAND}
-            </h1>
-            <p className="mb-8 text-[var(--text-muted)] leading-relaxed">
-              Тариф <strong className="text-white">{plan.name}</strong> активний.
-              {params.order ? (
-                <>
-                  {" "}
-                  Номер замовлення:{" "}
-                  <span className="text-white">{params.order}</span>.
-                </>
-              ) : null}{" "}
-              Лист з доступом надіслано на email (у демо — симуляція).
-            </p>
+  // ensure plan exists
+  getPlan(planId);
 
-            <div className="mb-8 space-y-3 text-left text-sm text-[var(--text-muted)]">
-              <p>
-                <strong className="text-white">Start:</strong> лінк на матеріали в
-                листі.
-              </p>
-              {(planId === "community" || planId === "mentor") && (
-                <p>
-                  <strong className="text-white">Community:</strong> інвайт у
-                  Telegram протягом кількох хвилин.
-                </p>
-              )}
-              {planId === "mentor" && (
-                <p>
-                  <strong className="text-white">Mentor:</strong> напиши{" "}
-                  {contacts.telegramHandle}, щоб узгодити дзвінки й розбір
-                  лендінгу.
-                </p>
-              )}
-            </div>
-
-            <div className="flex flex-wrap justify-center gap-3">
-              {(planId === "community" || planId === "mentor") && (
-                <CourseButton href={contacts.telegram} variant="primary">
-                  Відкрити Telegram
-                </CourseButton>
-              )}
-              {planId === "mentor" && (
-                <CourseButton href={contacts.telegram} variant="secondary">
-                  Написати мені
-                </CourseButton>
-              )}
-              <CourseButton href="/" variant="ghost">
-                На головну
-              </CourseButton>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  return <ThanksClient planId={planId} order={params.order} />;
 }

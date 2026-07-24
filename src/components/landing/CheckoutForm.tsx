@@ -18,9 +18,7 @@ export function CheckoutForm({ planId }: Props) {
   const [telegram, setTelegram] = useState("");
 
   if (!plan) {
-    return (
-      <p className="text-[var(--accent-coral)]">Тариф не знайдено.</p>
-    );
+    return <p className="text-[var(--accent-coral)]">Тариф не знайдено.</p>;
   }
 
   async function onSubmit(e: React.FormEvent) {
@@ -36,8 +34,6 @@ export function CheckoutForm({ planId }: Props) {
             planId: plan!.id,
             email,
             telegram: telegram || undefined,
-            amountUsd: plan!.priceUsd,
-            amountUah: plan!.priceUah,
           }),
         });
 
@@ -52,6 +48,11 @@ export function CheckoutForm({ planId }: Props) {
           return;
         }
 
+        if (data.redirectUrl.startsWith("http")) {
+          window.location.href = data.redirectUrl;
+          return;
+        }
+
         router.push(data.redirectUrl);
       } catch {
         setError("Помилка мережі. Спробуй ще раз.");
@@ -60,7 +61,10 @@ export function CheckoutForm({ planId }: Props) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="course-glass-strong space-y-5 p-6 md:p-8">
+    <form
+      onSubmit={onSubmit}
+      className="course-glass-strong space-y-5 p-6 md:p-8"
+    >
       <div>
         <p className="text-sm uppercase tracking-[0.14em] text-[var(--accent-cyan)]">
           Checkout
@@ -69,12 +73,14 @@ export function CheckoutForm({ planId }: Props) {
           {plan.name} — ${plan.priceUsd}
         </h1>
         <p className="mt-1 text-sm text-[var(--text-muted)]">
-          ≈ ₴{plan.priceUah.toLocaleString("uk-UA")} · mock-оплата (демо)
+          До сплати ≈ ₴{plan.priceUah.toLocaleString("uk-UA")} через WayForPay
         </p>
       </div>
 
       <label className="block">
-        <span className="mb-2 block text-sm text-[var(--text-muted)]">Email</span>
+        <span className="mb-2 block text-sm text-[var(--text-muted)]">
+          Email
+        </span>
         <input
           required
           type="email"
@@ -87,7 +93,10 @@ export function CheckoutForm({ planId }: Props) {
 
       <label className="block">
         <span className="mb-2 block text-sm text-[var(--text-muted)]">
-          Telegram (обовʼязково для Community / Mentor)
+          Telegram{" "}
+          {plan.id !== "start"
+            ? "(обовʼязково для Community / Mentor)"
+            : "(опційно)"}
         </span>
         <input
           required={plan.id !== "start"}
@@ -104,12 +113,14 @@ export function CheckoutForm({ planId }: Props) {
       ) : null}
 
       <CourseButton type="submit" className="w-full" data-plan={plan.id}>
-        {pending ? "Створюємо оплату…" : `Оплатити $${plan.priceUsd}`}
+        {pending
+          ? "Створюємо рахунок…"
+          : `Оплатити ₴${plan.priceUah.toLocaleString("uk-UA")}`}
       </CourseButton>
 
       <p className="text-xs leading-relaxed text-[var(--text-muted)]">
-        Демо-режим: реальну LiqPay / Fondy / Stripe підключимо після ключів.
-        Зараз після «оплати» відкриється thank-you з видачею доступу.
+        Оплата через WayForPay (картка, Apple Pay / Google Pay). Після успішної
+        оплати відкриється сторінка доступу.
       </p>
     </form>
   );

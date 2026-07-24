@@ -22,9 +22,21 @@ UTM-приклад: http://localhost:3000?from=tiktok
 
 ## Що всередині
 - Лендінг з glass UI, тарифами Start / Community / Mentor ($20 / $49 / $100)
-- Checkout + mock-оплата (`/api/pay/create`) → `/thanks`
+- Checkout + **WayForPay** (`/api/pay/create` → invoice → `/api/pay/webhook`) → `/thanks`
 - Side nav + mobile menu
 - Демо нерухомості LEV Estates лишилось під `/ru`, `/en`, `/bg`
+
+## WayForPay env (Vercel)
+```
+WAYFORPAY_MERCHANT_ACCOUNT=
+WAYFORPAY_SECRET_KEY=
+WAYFORPAY_DOMAIN=nomorebot.vercel.app
+WAYFORPAY_SERVICE_URL=https://nomorebot.vercel.app/api/pay/webhook
+NEXT_PUBLIC_SITE_URL=https://nomorebot.vercel.app
+```
+
+У кабінеті WayForPay домен магазину має збігатися з `WAYFORPAY_DOMAIN` (не Instagram).
+Після зміни env — Redeploy.
 
 ## Скрипти
 - `npm run dev` — локальна розробка

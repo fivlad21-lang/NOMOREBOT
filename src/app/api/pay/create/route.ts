@@ -1,17 +1,19 @@
 import { NextResponse } from "next/server";
 import { getPlan, type PlanId } from "@/data/course";
+import { saveOrder } from "@/lib/orders";
+import {
+  createInvoice,
+  encodeOrderReference,
+} from "@/lib/wayforpay";
 
 type Body = {
   planId?: PlanId;
   email?: string;
   telegram?: string;
-  amountUsd?: number;
-  amountUah?: number;
 };
 
 export async function POST(request: Request) {
   let body: Body;
-
   try {
     body = (await request.json()) as Body;
   } catch {
@@ -28,39 +30,68 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Email is required" }, { status: 400 });
   }
 
-  if (plan.id !== "start" && !body.telegram?.trim()) {
+  const telegram = body.telegram?.trim();
+  if (plan.id !== "start" && !telegram) {
     return NextResponse.json(
       { error: "Telegram is required for this plan" },
       { status: 400 },
     );
   }
 
-  const orderId = `SL-${Date.now().toString(36).toUpperCase()}`;
+  try {
+    const orderReference = encodeOrderReference({
+      planId: plan.id,
+      email,
+      telegram,
+    });
 
-  // Mock payment provider. Replace with LiqPay / Fondy / Stripe create-session.
-  const redirectUrl = `/thanks?plan=${plan.id}&order=${orderId}`;
+    saveOrder({
+      orderReference,
+      planId: plan.id,
+      email,
+      telegram,
+      amountUah: plan.priceUah,
+      status: "pending",
+      updatedAt: Date.now(),
+    });
 
-  // Optional: fire mock webhook side-effect in demo environments.
-  if (process.env.MOCK_PAY_WEBHOOK === "1") {
-    await fetch(new URL("/api/pay/webhook", request.url), {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        orderId,
-        planId: plan.id,
-        email,
-        telegram: body.telegram,
-        amountUsd: plan.priceUsd,
-        amountUah: plan.priceUah,
-        status: "success",
-      }),
-    }).catch(() => undefined);
+    const { ok, data, requestDomain } = await createInvoice({
+      orderReference,
+      amountUah: plan.priceUah,
+      productName: `NOMORE LAB — ${plan.name}`,
+      email,
+      telegram,
+      planId: plan.id,
+    });
+
+    if (!ok || !data.invoiceUrl) {
+      console.error("[pay.create] WayForPay error", data, { requestDomain });
+      return NextResponse.json(
+        {
+          error:
+            "Не вдалося створити рахунок WayForPay. Перевір merchantAccount, secret key і що domain у кабінеті = nomorebot.vercel.app",
+          details: data,
+        },
+        { status: 502 },
+      );
+    }
+
+    return NextResponse.json({
+      ok: true,
+      provider: "wayforpay",
+      orderId: orderReference,
+      redirectUrl: data.invoiceUrl,
+    });
+  } catch (err) {
+    console.error("[pay.create]", err);
+    return NextResponse.json(
+      {
+        error:
+          err instanceof Error
+            ? err.message
+            : "Payment create failed",
+      },
+      { status: 500 },
+    );
   }
-
-  return NextResponse.json({
-    ok: true,
-    provider: "mock",
-    orderId,
-    redirectUrl,
-  });
 }
