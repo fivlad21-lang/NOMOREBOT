@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { BRAND, BUILD_TIME, expert, expertPhoto } from "@/data/course";
+import { BRAND, BUILD_TIME, expert, heroBackdrop } from "@/data/course";
 import { CourseButton } from "./CourseButton";
 import { MetaChip } from "./MetaChip";
 
@@ -17,24 +17,23 @@ export function Hero({ subtitle }: Props) {
     >
       <div className="absolute inset-0" aria-hidden>
         <Image
-          src={expertPhoto}
+          src={heroBackdrop}
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[center_18%] opacity-55 md:opacity-70"
+          className="object-cover object-center opacity-50 md:opacity-65"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0b1020] via-[#0b1020]/88 to-[#0b1020]/35" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0b1020] via-transparent to-[#0b1020]/55" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0b1020] via-[#0b1020]/90 to-[#0b1020]/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0b1020] via-transparent to-[#0b1020]/50" />
       </div>
 
       <div className="course-container relative z-10 w-full">
-        <div className="hero-fade max-w-2xl">
-          <p className="course-display mb-4 text-4xl leading-[0.92] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
-            <span className="block">NOMORE</span>
-            <span className="block">LAB</span>
+        <div className="hero-fade max-w-3xl">
+          <p className="course-display mb-4 whitespace-nowrap text-4xl leading-none tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+            NOMORE LAB
           </p>
-          <h1 className="course-display mb-5 text-3xl leading-[1.08] sm:text-4xl md:text-5xl">
+          <h1 className="course-display mb-5 max-w-3xl text-3xl leading-[1.12] sm:text-4xl md:text-[2.65rem] md:leading-[1.15] lg:text-5xl">
             Збери лендінг під TikTok за вечір — і приймай оплату
           </h1>
           <p className="mb-7 max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:text-lg">

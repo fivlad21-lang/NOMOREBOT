@@ -50,6 +50,8 @@ export const thanksCopy = {
 } as const;
 
 export const expertPhoto = "/course/expert.png";
+/** Full-bleed hero backdrop (site-build mock), not the expert portrait */
+export const heroBackdrop = "/course/hero-build.png";
 
 export const navItems = [
   { href: "#top", label: "Старт", id: "top" },
