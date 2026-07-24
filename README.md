@@ -1,14 +1,8 @@
-# LEV Estates — Demo Showcase
+# SITE LAB — лендінг курсу
 
-Клікабельне демо нової вітрини нерухомості для [LEV Estates](https://www.levestates.com).
+Воронка продажу курсу зі створення сайтів (TikTok / Instagram / Telegram → оплата).
 
-## Що всередині
-- Каталог з фільтрами (локація, тип, ціна, кімнати, hot)
-- Режими **Grid / List / Map**
-- Картка об'єкта + схожі + форма запиту
-- Мультимова **RU / EN / BG** (перемикач + авто-детект браузера)
-- Mock-дані ~40 об'єктів (імітація CRM)
-- Форми лідів зберігаються в `localStorage` (demo)
+Повне ТЗ: [`TZ-COURSE-LANDING.md`](./TZ-COURSE-LANDING.md).
 
 ## Запуск
 ```bash
@@ -18,17 +12,15 @@ npm run dev
 
 Відкрийте http://localhost:3000
 
+UTM-приклад: http://localhost:3000?from=tiktok
+
+## Що всередині
+- Лендінг з glass UI, тарифами Start / Community / Mentor ($20 / $49 / $100)
+- Checkout + mock-оплата (`/api/pay/create`) → `/thanks`
+- Демо нерухомості LEV Estates лишилось під `/ru`, `/en`, `/bg`
+
 ## Скрипти
 - `npm run dev` — локальна розробка
 - `npm run build` — продакшен-збірка
 - `npm run start` — запуск збірки
-
-## Структура
-- `src/app/[locale]/…` — сторінки
-- `src/data/properties.ts` — mock CRM
-- `src/lib/api/properties.ts` — шар даних (готовий до заміни на API)
-- `src/messages/*.json` — переклади UI
-- `TZ-DEMO.md` — технічне завдання демо
-
-## Далі (не в цьому демо)
-Підключення реальної CRM по API, sync 1–2×/день, SEO/редіректи, деплой на `levestates.com`.
+- `npm run lint` — eslint
