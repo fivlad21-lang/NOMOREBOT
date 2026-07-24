@@ -234,11 +234,35 @@ const FAILED_STATUSES = new Set(
   ].map((s) => s.toLowerCase()),
 );
 
+/**
+ * Reason codes that mean "still waiting" even when transactionStatus
+ * is reported as Declined (common for unpaid CREATE_INVOICE + CHECK_STATUS).
+ * @see https://wiki.wayforpay.com/view/852131 — 1151 Invoice Is Awaiting For Payment
+ */
+const PENDING_REASON_CODES = new Set([
+  "1131", // Transaction in processing
+  "1132", // Delayed
+  "1134", // Pending antifraud
+  "1144", // Awaiting delivery
+  "1145", // Awaiting credit decision
+  "1151", // Invoice awaiting payment
+  "5100", // Wait 3DS data
+]);
+
 export type PaymentUiStatus = "paid" | "pending" | "failed";
 
 export function mapPaymentUiStatus(
   transactionStatus?: string | null,
+  reasonCode?: string | number | null,
 ): PaymentUiStatus {
+  const code =
+    reasonCode != null && String(reasonCode).trim() !== ""
+      ? String(reasonCode).trim()
+      : "";
+  if (code && PENDING_REASON_CODES.has(code)) {
+    return "pending";
+  }
+
   const raw = (transactionStatus || "").trim();
   if (!raw) return "pending";
   if (raw.toLowerCase() === "approved") return "paid";

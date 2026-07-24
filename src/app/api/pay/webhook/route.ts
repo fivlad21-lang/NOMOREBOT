@@ -11,6 +11,7 @@ import {
   buildWebhookAck,
   decodeOrderReference,
   getWfpConfig,
+  mapPaymentUiStatus,
   verifyWebhookSignature,
   type WfpWebhookPayload,
 } from "@/lib/wayforpay";
@@ -78,8 +79,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Amount mismatch" }, { status: 400 });
   }
 
-  const tx = (payload.transactionStatus || "").toLowerCase();
-  if (payload.transactionStatus === "Approved") {
+  const mapped = mapPaymentUiStatus(
+    payload.transactionStatus,
+    payload.reasonCode,
+  );
+
+  if (mapped === "paid") {
     const paid = markOrderPaid(orderReference) || order;
     if (paid && !paid.provisioned) {
       console.info("[pay.webhook] APPROVED — provision access", {
@@ -92,12 +97,7 @@ export async function POST(request: Request) {
       // TODO: send email + TG invite automation
       markProvisioned(orderReference);
     }
-  } else if (
-    tx === "declined" ||
-    tx === "expired" ||
-    tx === "refunded" ||
-    tx === "voided"
-  ) {
+  } else if (mapped === "failed") {
     markOrderFailed(orderReference);
     console.info("[pay.webhook] FAILED", {
       orderReference,
@@ -109,6 +109,7 @@ export async function POST(request: Request) {
       orderReference,
       transactionStatus: payload.transactionStatus,
       reasonCode: payload.reasonCode,
+      mapped,
     });
   }
 

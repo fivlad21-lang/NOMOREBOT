@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "smoke:wfp": "node scripts/e2-wfp-smoke.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.42.2",

@@ -90,9 +90,12 @@ E1 Деплой і smoke
 3. 1 мікроплатіж собі → webhook + thanks → рефанд за політикою.
 
 ### Acceptance
-- [ ] Повна матриця на test_merch
-- [ ] Live keys і домен узгоджені
-- [ ] README: test keys ≠ production
+- [x] API-матриця на test_merch (`npm run smoke:wfp`) + фікс 1151→pending
+- [ ] Повна HPP-матриця Approved/Declined/Cancel (власник на Preview)
+- [x] Live vs test задокументовано (README + `docs/WAYFORPAY-TEST-LIVE.md`)
+- [ ] Live keys і домен узгоджені в кабінеті (чекліст власника)
+
+**Артефакт:** `TZ-NOMORE-LAB-2.0-E2.md`
 
 ---
 

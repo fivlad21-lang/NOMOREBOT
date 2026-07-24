@@ -68,7 +68,10 @@ export async function GET(request: Request) {
 
   try {
     const remote = await checkPaymentStatus(orderReference);
-    const mapped = mapPaymentUiStatus(remote.transactionStatus);
+    const mapped = mapPaymentUiStatus(
+      remote.transactionStatus,
+      remote.reasonCode,
+    );
 
     if (mapped === "paid") {
       markOrderPaid(orderReference);
@@ -107,6 +110,7 @@ export async function GET(request: Request) {
       planId: plan.id,
       transactionStatus: remote.transactionStatus,
       providerStatus: remote.transactionStatus || "Unknown",
+      reasonCode: remote.reasonCode ?? null,
     });
   } catch (err) {
     console.error("[pay.status]", err);

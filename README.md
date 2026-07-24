@@ -3,7 +3,8 @@
 Воронка продажу курсу зі створення сайтів (TikTok / Instagram / Telegram → оплата).
 
 - ТЗ: [`TZ-COURSE-LANDING.md`](./TZ-COURSE-LANDING.md)
-- Апдейт: [`TZ-NOMORE-LAB-1.1.md`](./TZ-NOMORE-LAB-1.1.md)
+- Roadmap: [`TZ-NOMORE-LAB-2.0.md`](./TZ-NOMORE-LAB-2.0.md)
+- Платежі test vs live: [`docs/WAYFORPAY-TEST-LIVE.md`](./docs/WAYFORPAY-TEST-LIVE.md)
 
 ## Запуск
 ```bash
@@ -22,11 +23,13 @@ UTM-приклад: http://localhost:3000?from=tiktok
 
 ## Що всередині
 - Лендінг з glass UI, тарифами Start / Community / Mentor ($20 / $49 / $100)
-- Checkout + **WayForPay** (`/api/pay/create` → invoice → `/api/pay/webhook`) → `/thanks`
+- Checkout + **WayForPay** (`/api/pay/create` → invoice → `/api/pay/return` → `/thanks`)
+- Webhook: `/api/pay/webhook`
 - Side nav + mobile menu
 - Демо нерухомості LEV Estates лишилось під `/ru`, `/en`, `/bg`
 
 ## WayForPay env (Vercel)
+
 ```
 WAYFORPAY_MERCHANT_ACCOUNT=
 WAYFORPAY_SECRET_KEY=
@@ -35,11 +38,23 @@ WAYFORPAY_SERVICE_URL=https://nomorebot.vercel.app/api/pay/webhook
 NEXT_PUBLIC_SITE_URL=https://nomorebot.vercel.app
 ```
 
-У кабінеті WayForPay домен магазину має збігатися з `WAYFORPAY_DOMAIN` (не Instagram).
+| Режим | Merchant | Куди |
+| --- | --- | --- |
+| Test (без реальних списань) | `test_merch_n1` + ключ з [wiki](https://wiki.wayforpay.com/view/852472) | Preview / local |
+| Live | твій магазин з кабінету | Production |
+
+У кабінеті домен магазину = `WAYFORPAY_DOMAIN` (не Instagram).  
 Після зміни env — Redeploy.
+
+API smoke на тест-мерчанті:
+
+```bash
+npm run smoke:wfp
+```
 
 ## Скрипти
 - `npm run dev` — локальна розробка
 - `npm run build` — продакшен-збірка
 - `npm run start` — запуск збірки
 - `npm run lint` — eslint
+- `npm run smoke:wfp` — E2 WayForPay test_merch smoke

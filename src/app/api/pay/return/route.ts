@@ -21,6 +21,7 @@ async function readWfpFields(request: Request): Promise<{
   orderReference?: string;
   transactionStatus?: string;
   reason?: string;
+  reasonCode?: string;
 }> {
   const contentType = request.headers.get("content-type") || "";
 
@@ -36,12 +37,9 @@ async function readWfpFields(request: Request): Promise<{
           typeof json.transactionStatus === "string"
             ? json.transactionStatus
             : undefined,
-        reason:
-          json.reason != null
-            ? String(json.reason)
-            : json.reasonCode != null
-              ? String(json.reasonCode)
-              : undefined,
+        reason: json.reason != null ? String(json.reason) : undefined,
+        reasonCode:
+          json.reasonCode != null ? String(json.reasonCode) : undefined,
       };
     }
 
@@ -52,17 +50,18 @@ async function readWfpFields(request: Request): Promise<{
       const form = await request.formData();
       const orderReference = form.get("orderReference");
       const transactionStatus = form.get("transactionStatus");
-      const reason = form.get("reason") ?? form.get("reasonCode");
+      const reason = form.get("reason");
+      const reasonCode = form.get("reasonCode");
       return {
         orderReference:
           typeof orderReference === "string" ? orderReference : undefined,
         transactionStatus:
           typeof transactionStatus === "string" ? transactionStatus : undefined,
         reason: reason != null ? String(reason) : undefined,
+        reasonCode: reasonCode != null ? String(reasonCode) : undefined,
       };
     }
 
-    // Some gateways POST raw text / empty body — ignore parse errors.
     const text = await request.text();
     if (text.trim().startsWith("{")) {
       const json = JSON.parse(text) as Record<string, unknown>;
@@ -76,6 +75,8 @@ async function readWfpFields(request: Request): Promise<{
             ? json.transactionStatus
             : undefined,
         reason: json.reason != null ? String(json.reason) : undefined,
+        reasonCode:
+          json.reasonCode != null ? String(json.reasonCode) : undefined,
       };
     }
   } catch (err) {
@@ -163,8 +164,10 @@ async function handleReturn(request: Request) {
 
   const transactionStatus =
     body.transactionStatus || searchParams.get("wfpStatus") || null;
+  const reasonCode =
+    body.reasonCode || searchParams.get("reasonCode") || null;
   const reason = body.reason || searchParams.get("reason") || null;
-  const uiStatus = mapPaymentUiStatus(transactionStatus);
+  const uiStatus = mapPaymentUiStatus(transactionStatus, reasonCode);
 
   if (order) {
     syncLocalOrder(order, planId, uiStatus);
