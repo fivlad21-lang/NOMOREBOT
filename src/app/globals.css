@@ -2,27 +2,29 @@
 @import "leaflet/dist/leaflet.css";
 
 :root {
+  --ink: #0b1c2c;
+  --ink-soft: #4a5d73;
+  --navy: #102a43;
+  --sea: #1a6b74;
+  --sea-bright: #22818c;
+  --gold: #c2a46b;
+  --foam: #f7f4ee;
+  --stone: #e8e2d6;
   --sand: #f3efe6;
-  --sand-deep: #e7e0d2;
-  --ink: #142033;
-  --ink-soft: #3b4a63;
-  --navy: #0f2744;
-  --sea: #1f6f7a;
-  --sea-bright: #2a8f9b;
-  --foam: #f8f6f1;
-  --line: rgba(20, 32, 51, 0.12);
-  --hot: #b45309;
+  --line: rgba(11, 28, 44, 0.1);
+  --hot: #9a3412;
 }
 
 @theme inline {
-  --color-sand: var(--sand);
-  --color-sand-deep: var(--sand-deep);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
   --color-navy: var(--navy);
   --color-sea: var(--sea);
   --color-sea-bright: var(--sea-bright);
+  --color-gold: var(--gold);
   --color-foam: var(--foam);
+  --color-stone: var(--stone);
+  --color-sand: var(--sand);
   --color-line: var(--line);
   --color-hot: var(--hot);
   --font-sans: var(--font-body);
@@ -41,11 +43,10 @@ body {
   margin: 0;
   min-height: 100%;
   background:
-    radial-gradient(1200px 600px at 10% -10%, rgba(42, 143, 155, 0.14), transparent 60%),
-    radial-gradient(900px 500px at 100% 0%, rgba(180, 150, 90, 0.12), transparent 55%),
-    linear-gradient(180deg, var(--foam), var(--sand));
+    radial-gradient(900px 480px at 0% -5%, rgba(26, 107, 116, 0.08), transparent 55%),
+    linear-gradient(180deg, #fbfaf7 0%, var(--foam) 45%, var(--stone) 140%);
   color: var(--ink);
-  font-family: var(--font-body), Georgia, serif;
+  font-family: var(--font-body), "Segoe UI", sans-serif;
 }
 
 a {
@@ -54,18 +55,67 @@ a {
 }
 
 ::selection {
-  background: rgba(31, 111, 122, 0.22);
+  background: rgba(194, 164, 107, 0.35);
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+.hero-kenburns {
+  animation: kenburns 14s ease-out forwards;
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.reveal-up {
+  animation: revealUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.reveal-up-delay {
+  animation: revealUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+.reveal-up-delay-2 {
+  animation: revealUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+}
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .leaflet-container {
   font: inherit;
-  background: #d9e5ea;
+  background: #d5e0e4;
 }
 
 .property-map {
   min-height: 420px;
   height: 100%;
   width: 100%;
-  border-radius: 1rem;
   overflow: hidden;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(11, 28, 44, 0.12);
+  border: 1px solid var(--line);
+}
+
+.leaflet-popup-content {
+  margin: 12px 14px;
 }

@@ -20,12 +20,13 @@ export default async function PropertiesPage({
   const location = sp.location as LocationKey | undefined;
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 md:px-6">
-      <div className="mb-8 max-w-3xl">
-        <h1 className="font-[family-name:var(--font-display)] text-5xl text-navy">
-          {t("title")}
-        </h1>
-        <p className="mt-3 text-ink-soft">{t("subtitle")}</p>
+    <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
+      <div className="mb-10 max-w-3xl">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-sea">
+          LEV Estates
+        </p>
+        <h1 className="mt-3 font-display text-5xl text-navy md:text-6xl">{t("title")}</h1>
+        <p className="mt-4 text-lg text-ink-soft">{t("subtitle")}</p>
       </div>
       <CatalogClient
         initialProperties={properties}

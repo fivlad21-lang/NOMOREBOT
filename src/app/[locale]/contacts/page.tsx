@@ -12,27 +12,30 @@ export default async function ContactsPage({
   const tc = await getTranslations("common");
 
   return (
-    <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-2 md:px-6">
+    <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 md:grid-cols-2 md:px-6 md:py-24">
       <div>
-        <h1 className="font-[family-name:var(--font-display)] text-5xl text-navy">
-          {t("title")}
-        </h1>
-        <p className="mt-4 text-ink-soft">{t("subtitle")}</p>
-        <div className="mt-8 space-y-3 text-lg">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-sea">
+          LEV Estates
+        </p>
+        <h1 className="mt-4 font-display text-5xl text-navy md:text-6xl">{t("title")}</h1>
+        <p className="mt-5 max-w-md text-lg text-ink-soft">{t("subtitle")}</p>
+        <div className="mt-10 space-y-4 border-t border-line pt-8 text-lg">
           <p>
-            <a className="text-sea hover:underline" href={`tel:${tc("phone").replace(/\s/g, "")}`}>
+            <a className="text-navy hover:text-sea" href={`tel:${tc("phone").replace(/\s/g, "")}`}>
               {tc("phone")}
             </a>
           </p>
           <p>
-            <a className="text-sea hover:underline" href={`mailto:${tc("email")}`}>
+            <a className="text-navy hover:text-sea" href={`mailto:${tc("email")}`}>
               {tc("email")}
             </a>
           </p>
           <p className="text-ink-soft">{t("address")}</p>
         </div>
       </div>
-      <LeadForm />
+      <div className="border border-line bg-white/70 p-6 md:p-8">
+        <LeadForm />
+      </div>
     </div>
   );
 }

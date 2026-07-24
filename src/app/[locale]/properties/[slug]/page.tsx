@@ -9,6 +9,7 @@ import {
 import { PropertyCard } from "@/components/property/PropertyCard";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { PropertyMap } from "@/components/map/PropertyMap";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { LocaleCode } from "@/lib/types";
 import {
   formatPrice,
@@ -34,18 +35,21 @@ export default async function PropertyDetailsPage({
   const similar = getSimilarProperties(property, 3);
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 md:px-6">
-      <Link href="/properties" className="text-sm font-semibold text-sea hover:underline">
+    <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
+      <Link
+        href="/properties"
+        className="text-xs font-semibold uppercase tracking-[0.16em] text-sea hover:text-sea-bright"
+      >
         ← {t("common.backToCatalog")}
       </Link>
 
-      <div className="mt-4 grid gap-8 lg:grid-cols-[1.4fr_0.8fr]">
+      <div className="mt-6 grid gap-10 lg:grid-cols-[1.45fr_0.75fr]">
         <div>
-          <div className="grid gap-3 md:grid-cols-2">
+          <div className="grid gap-2 md:grid-cols-2">
             {property.images.map((src, idx) => (
               <div
                 key={src + idx}
-                className={`relative overflow-hidden rounded-2xl ${
+                className={`relative overflow-hidden ${
                   idx === 0 ? "md:col-span-2 aspect-[16/9]" : "aspect-[4/3]"
                 }`}
               >
@@ -61,26 +65,26 @@ export default async function PropertyDetailsPage({
             ))}
           </div>
 
-          <div className="mt-8">
-            <div className="flex flex-wrap items-center gap-2">
+          <div className="mt-10">
+            <div className="flex flex-wrap items-center gap-3">
               {property.hot && (
-                <span className="rounded-full bg-hot/10 px-2.5 py-1 text-xs font-semibold text-hot">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-hot">
                   {t("common.hot")}
                 </span>
               )}
-              <span className="text-sm text-ink-soft">
+              <span className="text-[10px] uppercase tracking-[0.16em] text-ink-soft">
                 {t(`locations.${property.locationKey}`)} · {t(`types.${property.type}`)}
               </span>
             </div>
-            <h1 className="mt-2 font-[family-name:var(--font-display)] text-4xl text-navy md:text-5xl">
+            <h1 className="mt-3 font-display text-4xl leading-tight text-navy md:text-5xl">
               {title}
             </h1>
-            <p className="mt-2 text-ink-soft">{propertyAddress(property, loc)}</p>
-            <p className="mt-4 text-3xl font-semibold text-sea">
+            <p className="mt-3 text-ink-soft">{propertyAddress(property, loc)}</p>
+            <p className="mt-5 font-display text-4xl text-sea md:text-5xl">
               {formatPrice(property.priceEur, loc)}
             </p>
 
-            <div className="mt-8 grid gap-3 rounded-2xl border border-line bg-white/70 p-5 sm:grid-cols-3">
+            <div className="mt-10 grid gap-6 border-y border-line py-6 sm:grid-cols-3">
               <Spec
                 label={t("property.rooms")}
                 value={roomsLabel(property.rooms, (k) => t(`common.${k}`))}
@@ -98,35 +102,40 @@ export default async function PropertyDetailsPage({
               )}
             </div>
 
-            <h2 className="mt-10 font-[family-name:var(--font-display)] text-3xl text-navy">
+            <h2 className="mt-10 font-display text-3xl text-navy">
               {t("property.description")}
             </h2>
-            <p className="mt-3 max-w-3xl leading-relaxed text-ink-soft">
+            <p className="mt-4 max-w-3xl text-lg leading-relaxed text-ink-soft">
               {propertyDescription(property, loc)}
             </p>
 
-            <h2 className="mt-10 font-[family-name:var(--font-display)] text-3xl text-navy">
+            <h2 className="mt-12 font-display text-3xl text-navy">
               {t("property.location")}
             </h2>
-            <div className="mt-4 h-[360px] overflow-hidden rounded-2xl border border-line">
+            <div className="mt-5 h-[380px] overflow-hidden border border-line">
               <PropertyMap properties={[property]} />
             </div>
           </div>
         </div>
 
-        <aside className="lg:sticky lg:top-24 lg:h-fit">
-          <h2 className="mb-3 font-[family-name:var(--font-display)] text-2xl text-navy">
-            {t("property.askTitle")}
-          </h2>
-          <LeadForm compact propertyId={property.id} propertyTitle={title} />
+        <aside className="lg:sticky lg:top-28 lg:h-fit">
+          <div className="border border-line bg-white/75 p-6">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold">
+              LEV Estates
+            </p>
+            <h2 className="mt-2 font-display text-2xl text-navy">
+              {t("property.askTitle")}
+            </h2>
+            <div className="mt-5">
+              <LeadForm compact propertyId={property.id} propertyTitle={title} />
+            </div>
+          </div>
         </aside>
       </div>
 
       {similar.length > 0 && (
-        <section className="mt-16">
-          <h2 className="mb-5 font-[family-name:var(--font-display)] text-3xl text-navy">
-            {t("common.similar")}
-          </h2>
+        <section className="mt-20">
+          <SectionHeading title={t("common.similar")} />
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {similar.map((item) => (
               <PropertyCard key={item.id} property={item} />
@@ -141,8 +150,8 @@ export default async function PropertyDetailsPage({
 function Spec({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="text-xs uppercase tracking-wide text-ink-soft">{label}</p>
-      <p className="mt-1 text-lg font-semibold text-navy">{value}</p>
+      <p className="text-[10px] uppercase tracking-[0.16em] text-ink-soft">{label}</p>
+      <p className="mt-2 font-display text-2xl text-navy">{value}</p>
     </div>
   );
 }

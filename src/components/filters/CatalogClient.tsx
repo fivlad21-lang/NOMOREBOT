@@ -88,7 +88,6 @@ export function CatalogClient({
     () => applyFilters(initialProperties, filters),
     [initialProperties, filters],
   );
-
   const shown = filtered.slice(0, visible);
 
   function toggleInArray<T extends string | number>(
@@ -111,23 +110,21 @@ export function CatalogClient({
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
-      <aside className="h-fit rounded-2xl border border-line bg-white/80 p-4 lg:sticky lg:top-24">
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="font-[family-name:var(--font-display)] text-2xl text-navy">
-            {t("catalog.filters")}
-          </h2>
+    <div className="grid gap-8 lg:grid-cols-[260px_1fr]">
+      <aside className="h-fit border border-line bg-white/70 p-5 lg:sticky lg:top-24">
+        <div className="mb-5 flex items-center justify-between">
+          <h2 className="font-display text-2xl text-navy">{t("catalog.filters")}</h2>
           <button
             type="button"
             onClick={reset}
-            className="text-sm text-sea hover:underline"
+            className="text-xs font-semibold uppercase tracking-[0.14em] text-sea hover:text-sea-bright"
           >
             {t("common.reset")}
           </button>
         </div>
 
-        <label className="mb-4 block">
-          <span className="mb-1 block text-xs uppercase tracking-wide text-ink-soft">
+        <label className="mb-5 block">
+          <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-soft">
             {t("catalog.searchPlaceholder")}
           </span>
           <input
@@ -136,7 +133,7 @@ export function CatalogClient({
               setFilters((p) => ({ ...p, query: e.target.value }));
               setVisible(12);
             }}
-            className="w-full rounded-xl border border-line bg-foam px-3 py-2 text-sm outline-none ring-sea focus:ring-2"
+            className="w-full border border-line bg-foam px-3 py-2.5 text-sm outline-none transition focus:border-sea"
             placeholder={t("catalog.searchPlaceholder")}
           />
         </label>
@@ -174,9 +171,11 @@ export function CatalogClient({
           ))}
         </FilterGroup>
 
-        <div className="mb-4 grid grid-cols-2 gap-2">
+        <div className="mb-5 grid grid-cols-2 gap-2">
           <label className="text-sm">
-            <span className="mb-1 block text-xs uppercase text-ink-soft">{t("common.from")}</span>
+            <span className="mb-1 block text-[10px] uppercase tracking-[0.14em] text-ink-soft">
+              {t("common.from")}
+            </span>
             <input
               type="number"
               value={filters.priceMin ?? ""}
@@ -187,11 +186,13 @@ export function CatalogClient({
                 }));
                 setVisible(12);
               }}
-              className="w-full rounded-xl border border-line bg-foam px-3 py-2 outline-none ring-sea focus:ring-2"
+              className="w-full border border-line bg-foam px-3 py-2 outline-none focus:border-sea"
             />
           </label>
           <label className="text-sm">
-            <span className="mb-1 block text-xs uppercase text-ink-soft">{t("common.to")}</span>
+            <span className="mb-1 block text-[10px] uppercase tracking-[0.14em] text-ink-soft">
+              {t("common.to")}
+            </span>
             <input
               type="number"
               value={filters.priceMax ?? ""}
@@ -202,12 +203,12 @@ export function CatalogClient({
                 }));
                 setVisible(12);
               }}
-              className="w-full rounded-xl border border-line bg-foam px-3 py-2 outline-none ring-sea focus:ring-2"
+              className="w-full border border-line bg-foam px-3 py-2 outline-none focus:border-sea"
             />
           </label>
         </div>
 
-        <label className="mb-4 flex items-center gap-2 text-sm">
+        <label className="mb-5 flex items-center gap-2 text-sm text-ink-soft">
           <input
             type="checkbox"
             checked={Boolean(filters.hotOnly)}
@@ -221,7 +222,9 @@ export function CatalogClient({
         </label>
 
         <label className="block text-sm">
-          <span className="mb-1 block text-xs uppercase text-ink-soft">{t("catalog.sort")}</span>
+          <span className="mb-1 block text-[10px] uppercase tracking-[0.14em] text-ink-soft">
+            {t("catalog.sort")}
+          </span>
           <select
             value={filters.sort ?? "newest"}
             onChange={(e) =>
@@ -230,7 +233,7 @@ export function CatalogClient({
                 sort: e.target.value as PropertyFilters["sort"],
               }))
             }
-            className="w-full rounded-xl border border-line bg-foam px-3 py-2 outline-none ring-sea focus:ring-2"
+            className="w-full border border-line bg-foam px-3 py-2 outline-none focus:border-sea"
           >
             <option value="newest">{t("catalog.sortNewest")}</option>
             <option value="price_asc">{t("catalog.sortPriceAsc")}</option>
@@ -241,11 +244,11 @@ export function CatalogClient({
       </aside>
 
       <section>
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <p className="text-sm text-ink-soft">
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-line pb-4">
+          <p className="text-sm tracking-wide text-ink-soft">
             {t("catalog.results", { count: filtered.length })}
           </p>
-          <div className="flex overflow-hidden rounded-full border border-line bg-white/80 p-1 text-sm font-semibold">
+          <div className="flex border border-line bg-white/80 p-1 text-xs font-semibold uppercase tracking-[0.12em]">
             {(
               [
                 ["grid", t("catalog.viewGrid")],
@@ -257,7 +260,7 @@ export function CatalogClient({
                 key={mode}
                 type="button"
                 onClick={() => setView(mode)}
-                className={`rounded-full px-3 py-1.5 transition ${
+                className={`px-3 py-2 transition ${
                   view === mode ? "bg-navy text-foam" : "text-ink-soft hover:text-navy"
                 }`}
               >
@@ -268,21 +271,28 @@ export function CatalogClient({
         </div>
 
         {filtered.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-line bg-white/60 px-6 py-16 text-center">
-            <p className="font-[family-name:var(--font-display)] text-3xl text-navy">
-              {t("common.noResults")}
-            </p>
+          <div className="border border-dashed border-line bg-white/50 px-6 py-20 text-center">
+            <p className="font-display text-3xl text-navy">{t("common.noResults")}</p>
             <button
               type="button"
               onClick={reset}
-              className="mt-4 rounded-full bg-sea px-5 py-2 text-sm font-semibold text-white"
+              className="mt-5 border border-navy px-5 py-2 text-sm font-semibold uppercase tracking-wide text-navy hover:bg-navy hover:text-white"
             >
               {t("common.resetFilters")}
             </button>
           </div>
         ) : view === "map" ? (
-          <div className="h-[70vh] min-h-[480px] overflow-hidden rounded-2xl border border-line">
-            <PropertyMap properties={filtered} />
+          <div className="grid h-[72vh] min-h-[520px] overflow-hidden border border-line lg:grid-cols-[1.15fr_0.85fr]">
+            <div className="min-h-[320px]">
+              <PropertyMap properties={filtered} />
+            </div>
+            <div className="hidden overflow-y-auto border-l border-line bg-white/70 lg:block">
+              <div className="grid gap-0">
+                {filtered.slice(0, 20).map((property) => (
+                  <PropertyCard key={property.id} property={property} variant="list" />
+                ))}
+              </div>
+            </div>
           </div>
         ) : (
           <>
@@ -290,7 +300,7 @@ export function CatalogClient({
               className={
                 view === "grid"
                   ? "grid gap-5 sm:grid-cols-2 xl:grid-cols-3"
-                  : "grid gap-4"
+                  : "grid gap-3"
               }
             >
               {shown.map((property) => (
@@ -298,11 +308,11 @@ export function CatalogClient({
               ))}
             </div>
             {visible < filtered.length && (
-              <div className="mt-8 flex justify-center">
+              <div className="mt-10 flex justify-center">
                 <button
                   type="button"
                   onClick={() => setVisible((v) => v + 12)}
-                  className="rounded-full border border-line bg-white px-5 py-2 text-sm font-semibold text-navy hover:border-sea"
+                  className="border border-line bg-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-navy transition hover:border-sea hover:text-sea"
                 >
                   {t("common.showMore")}
                 </button>
@@ -323,8 +333,10 @@ function FilterGroup({
   children: React.ReactNode;
 }) {
   return (
-    <div className="mb-4">
-      <p className="mb-2 text-xs uppercase tracking-wide text-ink-soft">{label}</p>
+    <div className="mb-5">
+      <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-soft">
+        {label}
+      </p>
       <div className="flex flex-wrap gap-2">{children}</div>
     </div>
   );
@@ -343,9 +355,9 @@ function Chip({
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-full px-3 py-1 text-sm transition ${
+      className={`px-3 py-1.5 text-xs transition ${
         active
-          ? "bg-sea text-white"
+          ? "bg-navy text-white"
           : "border border-line bg-foam text-ink-soft hover:border-sea"
       }`}
     >

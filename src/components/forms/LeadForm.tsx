@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { useTranslations } from "next-intl";
 import type { LocationKey, PropertyType } from "@/lib/types";
+import { Button } from "@/components/ui/Button";
 
 type Props = {
   propertyId?: string;
@@ -48,7 +49,7 @@ export function LeadForm({ propertyId, propertyTitle, compact }: Props) {
       prev.push(payload);
       localStorage.setItem("lev-demo-leads", JSON.stringify(prev));
     } catch {
-      // ignore storage errors in demo
+      // ignore
     }
     setDone(true);
     e.currentTarget.reset();
@@ -56,8 +57,9 @@ export function LeadForm({ propertyId, propertyTitle, compact }: Props) {
 
   if (done) {
     return (
-      <div className="rounded-2xl border border-sea/30 bg-sea/10 px-5 py-6 text-sea">
-        {t("success")}
+      <div className="border border-gold/40 bg-gold/10 px-5 py-8 text-center">
+        <p className="font-display text-2xl text-navy">{t("successTitle")}</p>
+        <p className="mt-2 text-sm text-ink-soft">{t("success")}</p>
       </div>
     );
   }
@@ -73,10 +75,10 @@ export function LeadForm({ propertyId, propertyTitle, compact }: Props) {
   const types: PropertyType[] = ["apartment", "house", "land", "commercial"];
 
   return (
-    <form onSubmit={onSubmit} className="space-y-3 rounded-2xl border border-line bg-white/80 p-5">
+    <form onSubmit={onSubmit} className="space-y-4">
       {propertyTitle && (
-        <p className="text-sm text-ink-soft">
-          <span className="font-semibold text-navy">{propertyTitle}</span>
+        <p className="border-b border-line pb-3 text-sm text-ink-soft">
+          <span className="font-medium text-navy">{propertyTitle}</span>
         </p>
       )}
       <Field label={t("name")} error={errors.name}>
@@ -125,18 +127,15 @@ export function LeadForm({ propertyId, propertyTitle, compact }: Props) {
           {errors.consent && <span className="mt-1 block text-hot">{errors.consent}</span>}
         </span>
       </label>
-      <button
-        type="submit"
-        className="w-full rounded-full bg-sea px-4 py-3 text-sm font-semibold text-white transition hover:bg-sea-bright"
-      >
+      <Button type="submit" className="w-full">
         {t("submit")}
-      </button>
+      </Button>
     </form>
   );
 }
 
 const inputClass =
-  "w-full rounded-xl border border-line bg-foam px-3 py-2 text-sm outline-none ring-sea focus:ring-2";
+  "w-full border border-line bg-foam px-3 py-2.5 text-sm outline-none transition focus:border-sea";
 
 function Field({
   label,
@@ -149,7 +148,9 @@ function Field({
 }) {
   return (
     <label className="block text-sm">
-      <span className="mb-1 block text-ink-soft">{label}</span>
+      <span className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-soft">
+        {label}
+      </span>
       {children}
       {error && <span className="mt-1 block text-xs text-hot">{error}</span>}
     </label>

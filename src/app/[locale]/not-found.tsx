@@ -4,10 +4,13 @@ import { Link } from "@/i18n/navigation";
 export default function NotFound() {
   const t = useTranslations("common");
   return (
-    <div className="mx-auto flex min-h-[50vh] max-w-3xl flex-col items-start justify-center px-4 py-20">
-      <h1 className="font-[family-name:var(--font-display)] text-5xl text-navy">404</h1>
-      <p className="mt-3 text-ink-soft">{t("noResults")}</p>
-      <Link href="/properties" className="mt-6 rounded-full bg-sea px-5 py-2 text-sm font-semibold text-white">
+    <div className="mx-auto flex min-h-[50vh] max-w-3xl flex-col items-start justify-center px-4 py-24">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-sea">404</p>
+      <h1 className="mt-3 font-display text-5xl text-navy">{t("noResults")}</h1>
+      <Link
+        href="/properties"
+        className="mt-8 border border-navy px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-navy transition hover:bg-navy hover:text-white"
+      >
         {t("backToCatalog")}
       </Link>
     </div>
