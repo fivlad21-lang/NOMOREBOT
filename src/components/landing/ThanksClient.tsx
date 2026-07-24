@@ -125,7 +125,7 @@ function FailedState({
   planId,
   reason,
 }: {
-  order: string;
+  order: string | null;
   planId: PlanId;
   reason: string | null;
 }) {
@@ -150,7 +150,9 @@ function FailedState({
         {reason ? (
           <p className="mt-2 text-sm text-course-muted/80">Причина: {reason}</p>
         ) : null}
-        <p className="mt-2 text-xs text-course-muted/70">Замовлення: {order}</p>
+        {order ? (
+          <p className="mt-2 text-xs text-course-muted/70">Замовлення: {order}</p>
+        ) : null}
       </div>
 
       <div className="rounded-2xl border border-rose-400/20 bg-rose-400/[0.06] px-4 py-3 text-sm leading-relaxed text-rose-100/90">
@@ -163,7 +165,7 @@ function FailedState({
           href={`/checkout?plan=${planId}`}
           className="inline-flex min-h-12 items-center justify-center rounded-full bg-course-accent px-6 py-3 text-sm font-semibold text-course-ink transition hover:brightness-110"
         >
-          Спробувати ще раз
+          Спробувати знову
         </Link>
         <a
           href={contacts.telegram}
@@ -181,25 +183,41 @@ function FailedState({
 export function ThanksClient({
   planId: initialPlanId,
   order,
+  initialStatus,
+  initialReason,
 }: {
   planId: PlanId;
   order?: string;
+  initialStatus?: "paid" | "pending" | "failed";
+  initialReason?: string | null;
 }) {
   const orderId = order ?? null;
-  const [status, setStatus] = useState<PayUiStatus>(
-    orderId ? "pending" : "unknown",
-  );
+  const [status, setStatus] = useState<PayUiStatus>(() => {
+    if (!orderId && !initialStatus) return "unknown";
+    if (initialStatus === "failed") return "failed";
+    if (initialStatus === "paid") return "paid";
+    return orderId ? "pending" : "unknown";
+  });
   const [planId, setPlanId] = useState<PlanId>(initialPlanId);
-  const [reason, setReason] = useState<string | null>(null);
+  const [reason, setReason] = useState<string | null>(initialReason ?? null);
   const [error, setError] = useState<string | null>(
-    orderId ? null : "Немає номера замовлення. Повернись на сторінку пакетів.",
+    orderId || initialStatus === "failed"
+      ? null
+      : "Немає номера замовлення. Повернись на сторінку пакетів.",
   );
 
   useEffect(() => {
+    // Hint already failed/paid — still confirm via API when order exists,
+    // but do not block UI on pending spinner.
     if (!orderId) return;
+    if (status === "failed" && initialStatus === "failed") {
+      // One confirming poll, no long loop needed for clear declines.
+    }
 
     let cancelled = false;
     let attempts = 0;
+    const maxAttempts =
+      initialStatus === "failed" || initialStatus === "paid" ? 3 : 40;
 
     const poll = async () => {
       attempts += 1;
@@ -218,7 +236,15 @@ export function ThanksClient({
 
         if (cancelled) return;
 
-        setStatus(data.status);
+        // Never downgrade paid → pending/failed from a flaky check.
+        setStatus((prev) => {
+          if (prev === "paid") return "paid";
+          if (data.status === "paid") return "paid";
+          if (data.status === "failed") return "failed";
+          if (prev === "failed") return "failed";
+          return data.status;
+        });
+
         if (
           data.planId === "start" ||
           data.planId === "community" ||
@@ -228,17 +254,18 @@ export function ThanksClient({
         }
         const detail =
           data.reason || data.transactionStatus || data.providerStatus || null;
-        if (detail && data.status === "failed") {
+        if (detail && (data.status === "failed" || status === "failed")) {
           setReason(String(detail));
         }
 
-        if (data.status === "pending" && attempts < 40) {
+        const settled = data.status === "paid" || data.status === "failed";
+        if (!settled && attempts < maxAttempts) {
           window.setTimeout(poll, 2500);
         }
       } catch (err) {
         if (cancelled) return;
         setError(err instanceof Error ? err.message : "Помилка перевірки");
-        if (attempts < 40) {
+        if (attempts < maxAttempts && status !== "failed") {
           window.setTimeout(poll, 3500);
         }
       }
@@ -249,7 +276,8 @@ export function ThanksClient({
     return () => {
       cancelled = true;
     };
-  }, [orderId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- poll once per order
+  }, [orderId, initialStatus]);
 
   return (
     <div className="mx-auto max-w-2xl px-5 py-16 sm:px-8 sm:py-24">
@@ -290,12 +318,18 @@ export function ThanksClient({
                 }}
               />
             </div>
+            <Link
+              href={`/checkout?plan=${planId}`}
+              className="inline-flex text-sm text-course-muted underline-offset-4 hover:text-white hover:underline"
+            >
+              Скасувати і спробувати знову
+            </Link>
           </motion.div>
         )}
 
         {status === "paid" && <SuccessByPlan planId={planId} />}
 
-        {status === "failed" && orderId && (
+        {status === "failed" && (
           <FailedState order={orderId} planId={planId} reason={reason} />
         )}
 
@@ -315,19 +349,17 @@ export function ThanksClient({
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/#pricing"
+                href={`/checkout?plan=${planId}`}
                 className="inline-flex min-h-12 items-center justify-center rounded-full bg-course-accent px-6 py-3 text-sm font-semibold text-course-ink transition hover:brightness-110"
+              >
+                Спробувати знову
+              </Link>
+              <Link
+                href="/#pricing"
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
               >
                 До пакетів
               </Link>
-              <a
-                href={contacts.telegram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
-              >
-                Написати в Telegram
-              </a>
             </div>
           </motion.div>
         )}

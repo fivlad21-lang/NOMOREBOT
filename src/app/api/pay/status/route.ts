@@ -9,32 +9,8 @@ import {
 import {
   checkPaymentStatus,
   decodeOrderReference,
+  mapPaymentUiStatus,
 } from "@/lib/wayforpay";
-
-/** WayForPay statuses that mean the payment will not succeed. */
-const FAILED_STATUSES = new Set(
-  [
-    "Declined",
-    "Expired",
-    "Refunded",
-    "Voided",
-    "RefundInProcessing",
-  ].map((s) => s.toLowerCase()),
-);
-
-function mapProviderStatus(transactionStatus?: string | null): {
-  status: "paid" | "pending" | "failed";
-  failed: boolean;
-} {
-  const raw = (transactionStatus || "").trim();
-  if (!raw) return { status: "pending", failed: false };
-  if (raw === "Approved") return { status: "paid", failed: false };
-  if (FAILED_STATUSES.has(raw.toLowerCase())) {
-    return { status: "failed", failed: true };
-  }
-  // InProcessing, Pending, WaitingAuthComplete, etc.
-  return { status: "pending", failed: false };
-}
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -92,9 +68,9 @@ export async function GET(request: Request) {
 
   try {
     const remote = await checkPaymentStatus(orderReference);
-    const mapped = mapProviderStatus(remote.transactionStatus);
+    const mapped = mapPaymentUiStatus(remote.transactionStatus);
 
-    if (mapped.status === "paid") {
+    if (mapped === "paid") {
       markOrderPaid(orderReference);
       return NextResponse.json({
         ok: true,
@@ -108,7 +84,7 @@ export async function GET(request: Request) {
       });
     }
 
-    if (mapped.status === "failed") {
+    if (mapped === "failed") {
       markOrderFailed(orderReference);
       return NextResponse.json({
         ok: true,
@@ -117,7 +93,10 @@ export async function GET(request: Request) {
         planId: plan.id,
         transactionStatus: remote.transactionStatus,
         providerStatus: remote.transactionStatus,
-        reason: remote.reason != null ? String(remote.reason) : remote.transactionStatus,
+        reason:
+          remote.reason != null
+            ? String(remote.reason)
+            : remote.transactionStatus,
       });
     }
 

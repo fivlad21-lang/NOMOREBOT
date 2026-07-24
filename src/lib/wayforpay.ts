@@ -81,7 +81,7 @@ type CreateInvoiceInput = {
 };
 
 export async function createInvoice(input: CreateInvoiceInput) {
-  const { merchantAccount, secretKey, domain, siteUrl, serviceUrl } =
+  const { merchantAccount, secretKey, domain, serviceUrl } =
     getWfpConfig();
 
   const orderDate = Math.floor(Date.now() / 1000);
@@ -103,7 +103,7 @@ export async function createInvoice(input: CreateInvoiceInput) {
     ...productPrice,
   ]);
 
-  const returnUrl = `${siteUrl.replace(/\/$/, "")}/thanks?plan=${input.planId}&order=${encodeURIComponent(input.orderReference)}`;
+  const returnUrl = buildReturnUrl(input.planId, input.orderReference);
 
   const body = {
     transactionType: "CREATE_INVOICE",
@@ -219,4 +219,43 @@ export async function checkPaymentStatus(orderReference: string) {
     currency?: string;
     orderReference?: string;
   };
+}
+
+/** WayForPay statuses that will not become Approved. */
+const FAILED_STATUSES = new Set(
+  [
+    "Declined",
+    "Expired",
+    "Refunded",
+    "Voided",
+    "RefundInProcessing",
+    "Rejected",
+    "Failed",
+  ].map((s) => s.toLowerCase()),
+);
+
+export type PaymentUiStatus = "paid" | "pending" | "failed";
+
+export function mapPaymentUiStatus(
+  transactionStatus?: string | null,
+): PaymentUiStatus {
+  const raw = (transactionStatus || "").trim();
+  if (!raw) return "pending";
+  if (raw.toLowerCase() === "approved") return "paid";
+  if (FAILED_STATUSES.has(raw.toLowerCase())) return "failed";
+  return "pending";
+}
+
+/**
+ * Build browser return URL. Goes through /api/pay/return so WayForPay POST
+ * never hits the App Router page (avoids "Server action not found").
+ */
+export function buildReturnUrl(planId: PlanId, orderReference: string) {
+  const { siteUrl } = getWfpConfig();
+  const base = siteUrl.replace(/\/$/, "");
+  const qs = new URLSearchParams({
+    plan: planId,
+    order: orderReference,
+  });
+  return `${base}/api/pay/return?${qs.toString()}`;
 }

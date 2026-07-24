@@ -1,8 +1,15 @@
+import { OrbBackground } from "@/components/landing/OrbBackground";
 import { ThanksClient } from "@/components/landing/ThanksClient";
 import { getPlan, type PlanId } from "@/data/course";
+import { mapPaymentUiStatus } from "@/lib/wayforpay";
 
 type Props = {
-  searchParams: Promise<{ plan?: string; order?: string }>;
+  searchParams: Promise<{
+    plan?: string;
+    order?: string;
+    wfpStatus?: string;
+    reason?: string;
+  }>;
 };
 
 const PLAN_IDS: PlanId[] = ["start", "community", "mentor"];
@@ -22,8 +29,23 @@ export default async function ThanksPage({ searchParams }: Props) {
       ? fromOrder
       : "community";
 
-  // ensure plan exists
   getPlan(planId);
 
-  return <ThanksClient planId={planId} order={params.order} />;
+  const hint = params.wfpStatus
+    ? mapPaymentUiStatus(params.wfpStatus)
+    : undefined;
+
+  return (
+    <div className="course-theme course-shell min-h-screen">
+      <OrbBackground />
+      <div className="course-content">
+        <ThanksClient
+          planId={planId}
+          order={params.order}
+          initialStatus={hint}
+          initialReason={params.reason || params.wfpStatus || null}
+        />
+      </div>
+    </div>
+  );
 }
