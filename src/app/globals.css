@@ -13,6 +13,9 @@
   --sand: #f3efe6;
   --line: rgba(11, 28, 44, 0.1);
   --hot: #9a3412;
+  --brand-navy: #0f2744;
+  --brand-accent: #c4a574;
+  --brand-coral: #e07a5f;
 }
 
 @theme inline {

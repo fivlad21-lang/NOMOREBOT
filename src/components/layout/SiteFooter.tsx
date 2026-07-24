@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { LevLogo } from "@/components/brand/LevLogo";
 
 export function SiteFooter() {
   const t = useTranslations("footer");
@@ -10,9 +11,7 @@ export function SiteFooter() {
     <footer className="mt-20 bg-navy text-foam">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 md:grid-cols-12 md:px-6">
         <div className="md:col-span-5">
-          <p className="font-display text-3xl tracking-wide">
-            LEV <span className="text-gold">Estates</span>
-          </p>
+          <LevLogo variant="light" size="sm" withWordmark />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/65">{t("tagline")}</p>
         </div>
         <div className="md:col-span-3">

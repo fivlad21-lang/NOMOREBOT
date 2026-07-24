@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { locales, type Locale } from "@/i18n/routing";
 import { ButtonLink } from "@/components/ui/Button";
+import { LevLogo } from "@/components/brand/LevLogo";
 
 const localeLabels: Record<Locale, string> = {
   ru: "RU",
@@ -46,14 +47,9 @@ export function SiteHeader() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 md:px-6">
-        <Link href="/" className="flex items-baseline gap-2 py-4">
-          <span className="font-display text-2xl font-semibold tracking-[0.04em] text-navy md:text-[1.7rem]">
-            LEV
-          </span>
-          <span className="text-[11px] font-semibold uppercase tracking-[0.28em] text-gold">
-            Estates
-          </span>
-        </Link>
+        <div className="py-3">
+          <LevLogo size="md" withWordmark />
+        </div>
 
         <nav className="hidden items-center gap-8 md:flex">
           {links.map((link) => {
