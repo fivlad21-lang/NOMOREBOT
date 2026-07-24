@@ -200,6 +200,14 @@ Vercel KV / Upstash Redis (або Postgres).
 Цільова структура: Hero → біль → proof → програма → експерт → відгуки → тарифи → FAQ → CTA.  
 Hero full-bleed; бренд hero-рівень; CTA з ціною; коротший лендінг.
 
+### Acceptance
+- [x] Порядок секцій: pricing перед FAQ; Audience/HowItWorks прибрано
+- [x] Hero full-bleed + бренд hero-рівень + новий H1
+- [x] CTA тарифів з ціною (`Оплатити … · ₴…`)
+- [x] Коротший лендінг (кроки в Pricing, forWhom у pain/pricing)
+
+**Артефакт:** `TZ-NOMORE-LAB-2.0-E7.md` — **PASS**
+
 ---
 
 # E8 — Аналітика і UTM
