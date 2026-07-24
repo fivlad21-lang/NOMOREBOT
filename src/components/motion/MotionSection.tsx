@@ -15,14 +15,18 @@ export function MotionSection({ children, className = "", delay = 0 }: Props) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    const show = () => setVisible(true);
+
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setVisible(true);
-      return;
+      const id = requestAnimationFrame(show);
+      return () => cancelAnimationFrame(id);
     }
+
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setVisible(true);
+          show();
           io.disconnect();
         }
       },

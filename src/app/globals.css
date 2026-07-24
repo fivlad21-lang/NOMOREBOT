@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "leaflet/dist/leaflet.css";
 @import "../styles/mazzard.css";
+@import "../styles/course.css";
 
 :root {
   --ink: #0b1c2c;
@@ -61,12 +62,9 @@ html {
 body {
   margin: 0;
   min-height: 100%;
-  background:
-    radial-gradient(900px 520px at 8% -8%, rgba(26, 107, 116, 0.12), transparent 55%),
-    radial-gradient(700px 420px at 100% 8%, rgba(196, 165, 116, 0.12), transparent 50%),
-    linear-gradient(180deg, #fbfaf7 0%, var(--foam) 42%, #ebe4d8 140%);
-  color: var(--ink);
-  font-family: "Mazzard H", var(--font-body), "Segoe UI", sans-serif;
+  background: #0b1020;
+  color: #f4f7ff;
+  font-family: var(--font-manrope), "Segoe UI", sans-serif;
   font-weight: 400;
 }
 
