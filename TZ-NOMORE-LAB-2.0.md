@@ -19,7 +19,7 @@
 | Thanks success по плану (канал/група/ментор) | є (1.2) |
 | Fail UI + POST return bridge | є (1.3), **prod PASS E1** |
 | Оферта / privacy / ФОП | заглушки |
-| Persisted orders | in-memory (ризик на Vercel) |
+| Persisted orders | код Redis/KV (E3); на проді увімкнути env |
 | Пікселі / email після оплати | немає |
 | Контент курсу в TG | поза кодом |
 
@@ -111,9 +111,12 @@ Vercel KV / Upstash Redis (або Postgres).
 `orderReference, planId, email, telegram?, amountUah, status, providerStatus?, reason?, provisioned, createdAt, updatedAt`
 
 ### Acceptance
-- [ ] Після cold start статус читається
-- [ ] Webhook Approved → poll = paid
-- [ ] Немає вічного pending при успішній оплаті
+- [x] Код: Redis/KV store + memory fallback; API async
+- [ ] Prod: `ordersBackend=redis` після додавання Upstash/KV env (власник)
+- [x] Webhook/status/return пишуть у спільний store
+- [x] Docs + `/api/pay/health` + `npm run smoke:orders`
+
+**Артефакт:** `TZ-NOMORE-LAB-2.0-E3.md`
 
 ---
 

@@ -10,6 +10,7 @@ type Body = {
   planId?: PlanId;
   email?: string;
   telegram?: string;
+  source?: string;
 };
 
 export async function POST(request: Request) {
@@ -45,14 +46,17 @@ export async function POST(request: Request) {
       telegram,
     });
 
-    saveOrder({
+    const now = Date.now();
+    await saveOrder({
       orderReference,
       planId: plan.id,
       email,
       telegram,
       amountUah: plan.priceUah,
       status: "pending",
-      updatedAt: Date.now(),
+      source: body.source?.trim() || null,
+      createdAt: now,
+      updatedAt: now,
     });
 
     const { ok, data, requestDomain } = await createInvoice({

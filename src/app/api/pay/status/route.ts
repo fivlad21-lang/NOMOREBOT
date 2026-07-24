@@ -31,18 +31,19 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Unknown plan" }, { status: 400 });
   }
 
-  let local = getOrder(orderReference);
+  let local = await getOrder(orderReference);
   if (!local) {
-    local = {
+    const now = Date.now();
+    local = await saveOrder({
       orderReference,
       planId: plan.id,
       email: meta.email,
       telegram: meta.telegram,
       amountUah: plan.priceUah,
       status: "pending",
-      updatedAt: Date.now(),
-    };
-    saveOrder(local);
+      createdAt: now,
+      updatedAt: now,
+    });
   }
 
   if (local.status === "paid") {
@@ -62,7 +63,7 @@ export async function GET(request: Request) {
       orderId: orderReference,
       status: "failed",
       planId: plan.id,
-      reason: "Payment not approved",
+      reason: local.reason || "Payment not approved",
     });
   }
 
@@ -74,7 +75,7 @@ export async function GET(request: Request) {
     );
 
     if (mapped === "paid") {
-      markOrderPaid(orderReference);
+      await markOrderPaid(orderReference);
       return NextResponse.json({
         ok: true,
         orderId: orderReference,
@@ -88,7 +89,13 @@ export async function GET(request: Request) {
     }
 
     if (mapped === "failed") {
-      markOrderFailed(orderReference);
+      await markOrderFailed(orderReference, {
+        providerStatus: remote.transactionStatus,
+        reason:
+          remote.reason != null
+            ? String(remote.reason)
+            : remote.transactionStatus,
+      });
       return NextResponse.json({
         ok: true,
         orderId: orderReference,

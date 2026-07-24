@@ -102,7 +102,7 @@ function resolvePlanAndOrder(input: {
   return { planId, order };
 }
 
-function syncLocalOrder(
+async function syncLocalOrder(
   orderReference: string,
   planId: PlanId,
   uiStatus: "paid" | "pending" | "failed",
@@ -111,24 +111,25 @@ function syncLocalOrder(
   const plan = getPlan(meta?.planId || planId);
   if (!plan) return;
 
-  let local = getOrder(orderReference);
+  let local = await getOrder(orderReference);
   if (!local && meta) {
-    local = {
+    const now = Date.now();
+    local = await saveOrder({
       orderReference,
       planId: plan.id,
       email: meta.email,
       telegram: meta.telegram,
       amountUah: plan.priceUah,
       status: "pending",
-      updatedAt: Date.now(),
-    };
-    saveOrder(local);
+      createdAt: now,
+      updatedAt: now,
+    });
   }
 
   if (uiStatus === "paid") {
-    markOrderPaid(orderReference);
+    await markOrderPaid(orderReference);
   } else if (uiStatus === "failed") {
-    markOrderFailed(orderReference);
+    await markOrderFailed(orderReference);
   }
 }
 
@@ -170,7 +171,7 @@ async function handleReturn(request: Request) {
   const uiStatus = mapPaymentUiStatus(transactionStatus, reasonCode);
 
   if (order) {
-    syncLocalOrder(order, planId, uiStatus);
+    await syncLocalOrder(order, planId, uiStatus);
   }
 
   console.info("[pay.return]", {

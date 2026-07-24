@@ -45,24 +45,26 @@ export async function POST(request: Request) {
   }
 
   const meta = decodeOrderReference(orderReference);
-  const existing = getOrder(orderReference);
+  let existing = await getOrder(orderReference);
 
   if (!existing && meta) {
     const plan = getPlan(meta.planId);
     if (plan) {
-      saveOrder({
+      const now = Date.now();
+      existing = await saveOrder({
         orderReference,
         planId: plan.id,
         email: meta.email,
         telegram: meta.telegram,
         amountUah: plan.priceUah,
         status: "pending",
-        updatedAt: Date.now(),
+        createdAt: now,
+        updatedAt: now,
       });
     }
   }
 
-  const order = getOrder(orderReference) || existing;
+  const order = (await getOrder(orderReference)) || existing;
   const expectedAmount = order?.amountUah;
   const paidAmount = Number(payload.amount);
 
@@ -85,7 +87,7 @@ export async function POST(request: Request) {
   );
 
   if (mapped === "paid") {
-    const paid = markOrderPaid(orderReference) || order;
+    const paid = (await markOrderPaid(orderReference)) || order;
     if (paid && !paid.provisioned) {
       console.info("[pay.webhook] APPROVED — provision access", {
         orderReference,
@@ -95,10 +97,16 @@ export async function POST(request: Request) {
         amountUah: paid.amountUah,
       });
       // TODO: send email + TG invite automation
-      markProvisioned(orderReference);
+      await markProvisioned(orderReference);
     }
   } else if (mapped === "failed") {
-    markOrderFailed(orderReference);
+    await markOrderFailed(orderReference, {
+      providerStatus: payload.transactionStatus,
+      reason:
+        payload.reason != null
+          ? String(payload.reason)
+          : payload.transactionStatus,
+    });
     console.info("[pay.webhook] FAILED", {
       orderReference,
       transactionStatus: payload.transactionStatus,

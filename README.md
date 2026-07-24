@@ -5,6 +5,7 @@
 - ТЗ: [`TZ-COURSE-LANDING.md`](./TZ-COURSE-LANDING.md)
 - Roadmap: [`TZ-NOMORE-LAB-2.0.md`](./TZ-NOMORE-LAB-2.0.md)
 - Платежі test vs live: [`docs/WAYFORPAY-TEST-LIVE.md`](./docs/WAYFORPAY-TEST-LIVE.md)
+- Orders persistence: [`docs/ORDERS-PERSISTENCE.md`](./docs/ORDERS-PERSISTENCE.md)
 
 ## Запуск
 ```bash
@@ -36,6 +37,8 @@ WAYFORPAY_SECRET_KEY=
 WAYFORPAY_DOMAIN=nomorebot.vercel.app
 WAYFORPAY_SERVICE_URL=https://nomorebot.vercel.app/api/pay/webhook
 NEXT_PUBLIC_SITE_URL=https://nomorebot.vercel.app
+UPSTASH_REDIS_REST_URL=
+UPSTASH_REDIS_REST_TOKEN=
 ```
 
 | Режим | Merchant | Куди |
@@ -58,3 +61,4 @@ npm run smoke:wfp
 - `npm run start` — запуск збірки
 - `npm run lint` — eslint
 - `npm run smoke:wfp` — E2 WayForPay test_merch smoke
+- `npm run smoke:orders` — E3 orders backend env smoke
