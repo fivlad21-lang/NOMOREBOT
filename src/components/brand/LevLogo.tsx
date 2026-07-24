@@ -208,12 +208,11 @@ export function LevLogo({
       {withWordmark && (
         <span className="leading-tight">
           <span
-            className={`block font-display text-xl font-semibold tracking-[0.04em] md:text-[1.45rem] ${
+            className={`block font-display text-xl font-semibold tracking-[-0.02em] md:text-[1.35rem] ${
               wordmarkLight ? "text-foam" : "text-navy"
             }`}
           >
-            LEV{" "}
-            <span className={wordmarkLight ? "text-gold" : "text-gold"}>Estates</span>
+            LEV <span className="text-gold">Estates</span>
           </span>
         </span>
       )}

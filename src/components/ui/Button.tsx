@@ -3,24 +3,26 @@ import { Link } from "@/i18n/navigation";
 type CommonProps = {
   children: React.ReactNode;
   className?: string;
-  variant?: "primary" | "secondary" | "ghost" | "onDark";
+  variant?: "primary" | "secondary" | "ghost" | "onDark" | "glass";
   size?: "md" | "lg";
 };
 
 const base =
-  "inline-flex items-center justify-center font-semibold tracking-wide transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sea";
+  "inline-flex items-center justify-center font-semibold tracking-wide transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sea shine-hover";
 
 const variants: Record<NonNullable<CommonProps["variant"]>, string> = {
-  primary: "bg-sea text-white hover:bg-sea-bright",
+  primary: "bg-sea text-white hover:bg-sea-bright shadow-[var(--shadow-soft)]",
   secondary:
-    "border border-white/35 bg-white/10 text-white backdrop-blur-sm hover:bg-white/18",
-  ghost: "border border-line bg-transparent text-navy hover:border-sea hover:text-sea",
+    "border border-white/35 bg-white/10 text-white backdrop-blur-md hover:bg-white/18",
+  ghost: "border border-line/80 bg-white/40 text-navy backdrop-blur-md hover:border-sea hover:text-sea",
   onDark: "bg-gold text-navy hover:brightness-105",
+  glass:
+    "glass-strong text-navy hover:shadow-[var(--shadow-lift)] border border-white/60",
 };
 
 const sizes: Record<NonNullable<CommonProps["size"]>, string> = {
-  md: "px-5 py-2.5 text-sm",
-  lg: "px-7 py-3.5 text-sm md:text-base",
+  md: "rounded-[14px] px-5 py-2.5 text-sm",
+  lg: "rounded-[16px] px-7 py-3.5 text-sm md:text-base",
 };
 
 function cx(...parts: Array<string | undefined>) {
@@ -37,7 +39,7 @@ export function ButtonLink({
   return (
     <Link
       href={href}
-      className={cx(base, variants[variant], sizes[size], "rounded-sm", className)}
+      className={cx(base, variants[variant], sizes[size], className)}
     >
       {children}
     </Link>
@@ -59,7 +61,7 @@ export function Button({
     <button
       type={type}
       onClick={onClick}
-      className={cx(base, variants[variant], sizes[size], "rounded-sm", className)}
+      className={cx(base, variants[variant], sizes[size], className)}
     >
       {children}
     </button>

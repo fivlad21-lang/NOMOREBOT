@@ -49,7 +49,7 @@ export default async function PropertyDetailsPage({
             {property.images.map((src, idx) => (
               <div
                 key={src + idx}
-                className={`relative overflow-hidden ${
+                className={`relative overflow-hidden rounded-[var(--radius-lg)] ${
                   idx === 0 ? "md:col-span-2 aspect-[16/9]" : "aspect-[4/3]"
                 }`}
               >
@@ -112,22 +112,22 @@ export default async function PropertyDetailsPage({
             <h2 className="mt-12 font-display text-3xl text-navy">
               {t("property.location")}
             </h2>
-            <div className="mt-5 h-[380px] overflow-hidden border border-line">
+            <div className="mt-5 h-[380px] overflow-hidden rounded-[var(--radius-xl)] border border-white/40 shadow-[var(--shadow-soft)]">
               <PropertyMap properties={[property]} />
             </div>
           </div>
         </div>
 
         <aside className="lg:sticky lg:top-28 lg:h-fit">
-          <div className="border border-line bg-white/75 p-6">
+          <div className="glass-dark rounded-[var(--radius-xl)] p-6">
             <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold">
               LEV Estates
             </p>
-            <h2 className="mt-2 font-display text-2xl text-navy">
+            <h2 className="mt-2 font-display text-2xl font-semibold text-foam">
               {t("property.askTitle")}
             </h2>
             <div className="mt-5">
-              <LeadForm compact propertyId={property.id} propertyTitle={title} />
+              <LeadForm compact tone="onDark" propertyId={property.id} propertyTitle={title} />
             </div>
           </div>
         </aside>

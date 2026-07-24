@@ -33,7 +33,7 @@ export default async function ContactsPage({
           <p className="text-ink-soft">{t("address")}</p>
         </div>
       </div>
-      <div className="border border-line bg-white/70 p-6 md:p-8">
+      <div className="glass-strong rounded-[var(--radius-xl)] p-6 md:p-8">
         <LeadForm />
       </div>
     </div>

@@ -1,0 +1,100 @@
+/* Mazzard H — files in /public/fonts/mazzard/*.woff2 */
+
+@font-face {
+  font-family: "Mazzard H";
+  src: url("/fonts/mazzard/MazzardH-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Mazzard H";
+  src: url("/fonts/mazzard/MazzardH-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Mazzard H";
+  src: url("/fonts/mazzard/MazzardH-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Mazzard H";
+  src: url("/fonts/mazzard/MazzardH-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Mazzard H";
+  src: url("/fonts/mazzard/MazzardH-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Mazzard H";
+  src: url("/fonts/mazzard/MazzardH-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Mazzard H";
+  src: url("/fonts/mazzard/MazzardH-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Mazzard H";
+  src: url("/fonts/mazzard/MazzardH-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Mazzard H";
+  src: url("/fonts/mazzard/MazzardH-BlackItalic.woff2") format("woff2");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Mazzard H";
+  src: url("/fonts/mazzard/MazzardH-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Mazzard H";
+  src: url("/fonts/mazzard/MazzardH-ExtraBoldItalic.woff2") format("woff2");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Mazzard H";
+  src: url("/fonts/mazzard/MazzardH-MediumItalic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Mazzard H";
+  src: url("/fonts/mazzard/MazzardH-SemiBoldItalic.woff2") format("woff2");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Mazzard H";
+  src: url("/fonts/mazzard/MazzardH-LightItalic.woff2") format("woff2");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}

@@ -17,7 +17,7 @@ export default async function SelectionPage({
       </p>
       <h1 className="mt-4 font-display text-5xl text-navy">{t("title")}</h1>
       <p className="mt-4 text-lg text-ink-soft">{t("subtitle")}</p>
-      <div className="mt-10 border border-line bg-white/70 p-6 md:p-8">
+      <div className="mt-10 glass-strong rounded-[var(--radius-xl)] p-6 md:p-8">
         <LeadForm />
       </div>
     </div>

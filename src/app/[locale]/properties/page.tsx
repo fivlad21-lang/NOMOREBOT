@@ -25,7 +25,9 @@ export default async function PropertiesPage({
         <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-sea">
           LEV Estates
         </p>
-        <h1 className="mt-3 font-display text-5xl text-navy md:text-6xl">{t("title")}</h1>
+        <h1 className="mt-3 font-display text-5xl font-semibold tracking-[-0.02em] text-navy md:text-6xl">
+          {t("title")}
+        </h1>
         <p className="mt-4 text-lg text-ink-soft">{t("subtitle")}</p>
       </div>
       <CatalogClient

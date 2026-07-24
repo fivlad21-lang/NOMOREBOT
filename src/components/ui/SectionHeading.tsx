@@ -20,7 +20,7 @@ export function SectionHeading({ eyebrow, title, subtitle, action, light }: Prop
           </p>
         )}
         <h2
-          className={`font-display text-4xl leading-tight md:text-5xl ${
+          className={`font-display text-4xl font-semibold leading-tight tracking-[-0.02em] md:text-5xl ${
             light ? "text-foam" : "text-navy"
           }`}
         >

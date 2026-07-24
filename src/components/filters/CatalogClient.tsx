@@ -110,10 +110,10 @@ export function CatalogClient({
   }
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[260px_1fr]">
-      <aside className="h-fit border border-line bg-white/70 p-5 lg:sticky lg:top-24">
+    <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
+      <aside className="glass-strong h-fit rounded-[var(--radius-xl)] p-5 lg:sticky lg:top-28">
         <div className="mb-5 flex items-center justify-between">
-          <h2 className="font-display text-2xl text-navy">{t("catalog.filters")}</h2>
+          <h2 className="font-display text-2xl font-semibold text-navy">{t("catalog.filters")}</h2>
           <button
             type="button"
             onClick={reset}
@@ -133,7 +133,7 @@ export function CatalogClient({
               setFilters((p) => ({ ...p, query: e.target.value }));
               setVisible(12);
             }}
-            className="w-full border border-line bg-foam px-3 py-2.5 text-sm outline-none transition focus:border-sea"
+            className="w-full rounded-[12px] border border-white/60 bg-white/50 px-3 py-2.5 text-sm outline-none transition focus:border-sea"
             placeholder={t("catalog.searchPlaceholder")}
           />
         </label>
@@ -244,11 +244,11 @@ export function CatalogClient({
       </aside>
 
       <section>
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-line pb-4">
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
           <p className="text-sm tracking-wide text-ink-soft">
             {t("catalog.results", { count: filtered.length })}
           </p>
-          <div className="flex border border-line bg-white/80 p-1 text-xs font-semibold uppercase tracking-[0.12em]">
+          <div className="glass flex rounded-full p-1 text-xs font-semibold uppercase tracking-[0.12em]">
             {(
               [
                 ["grid", t("catalog.viewGrid")],
@@ -260,8 +260,8 @@ export function CatalogClient({
                 key={mode}
                 type="button"
                 onClick={() => setView(mode)}
-                className={`px-3 py-2 transition ${
-                  view === mode ? "bg-navy text-foam" : "text-ink-soft hover:text-navy"
+                className={`rounded-full px-3.5 py-2 transition ${
+                  view === mode ? "bg-navy text-foam shadow-sm" : "text-ink-soft hover:text-navy"
                 }`}
               >
                 {label}
@@ -282,12 +282,12 @@ export function CatalogClient({
             </button>
           </div>
         ) : view === "map" ? (
-          <div className="grid h-[72vh] min-h-[520px] overflow-hidden border border-line lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="grid h-[72vh] min-h-[520px] overflow-hidden rounded-[var(--radius-xl)] border border-white/40 shadow-[var(--shadow-soft)] lg:grid-cols-[1.15fr_0.85fr]">
             <div className="min-h-[320px]">
               <PropertyMap properties={filtered} />
             </div>
-            <div className="hidden overflow-y-auto border-l border-line bg-white/70 lg:block">
-              <div className="grid gap-0">
+            <div className="glass-strong hidden overflow-y-auto lg:block">
+              <div className="grid gap-3 p-3">
                 {filtered.slice(0, 20).map((property) => (
                   <PropertyCard key={property.id} property={property} variant="list" />
                 ))}
@@ -355,10 +355,10 @@ function Chip({
     <button
       type="button"
       onClick={onClick}
-      className={`px-3 py-1.5 text-xs transition ${
+      className={`rounded-full px-3 py-1.5 text-xs transition ${
         active
-          ? "bg-navy text-white"
-          : "border border-line bg-foam text-ink-soft hover:border-sea"
+          ? "bg-navy text-white shadow-sm"
+          : "border border-white/60 bg-white/45 text-ink-soft hover:border-sea"
       }`}
     >
       {label}
